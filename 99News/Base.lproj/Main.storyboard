@@ -246,7 +246,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZBi-wa-Iys">
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Buscar por carros, esportes, etc." translatesAutoresizingMaskIntoConstraints="NO" id="ZBi-wa-Iys">
                                 <rect key="frame" x="0.0" y="64" width="269" height="44"/>
                                 <animations/>
                                 <textInputTraits key="textInputTraits"/>
@@ -300,7 +300,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="WPR-lw-f5o" id="fJc-ti-5ht"/>
                         <segue destination="JVN-zN-cg9" kind="show" id="riE-Yx-l9V"/>
                     </connections>
                 </viewController>
@@ -311,14 +310,6 @@
                         <outlet property="searchContentsController" destination="Ikx-6P-ce9" id="Sep-DH-Nii"/>
                         <outlet property="searchResultsDataSource" destination="Ikx-6P-ce9" id="1fE-vx-ua1"/>
                         <outlet property="searchResultsDelegate" destination="Ikx-6P-ce9" id="Dgf-jc-0RS"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="WPR-lw-f5o">
-                    <connections>
-                        <outlet property="delegate" destination="Ikx-6P-ce9" id="P7c-46-3Ml"/>
-                        <outlet property="searchContentsController" destination="Ikx-6P-ce9" id="Yq2-IG-73t"/>
-                        <outlet property="searchResultsDataSource" destination="Ikx-6P-ce9" id="nJF-Vh-XD3"/>
-                        <outlet property="searchResultsDelegate" destination="Ikx-6P-ce9" id="7Yd-oS-gIU"/>
                     </connections>
                 </searchDisplayController>
             </objects>
@@ -407,6 +398,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="p0P-NE-iBe"/>
+        <segue reference="riE-Yx-l9V"/>
     </inferredMetricsTieBreakers>
 </document>
