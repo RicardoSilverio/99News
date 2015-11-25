@@ -23,6 +23,7 @@
 		A4F482551C05111400FBA0BA /* NoticiaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482541C05111400FBA0BA /* NoticiaDAO.swift */; };
 		A4F482571C0514CB00FBA0BA /* GoogleNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */; };
 		A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482581C0514E900FBA0BA /* NoticiaVO.swift */; };
+		AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		A4F482541C05111400FBA0BA /* NoticiaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticiaDAO.swift; sourceTree = "<group>"; };
 		A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleNewsService.swift; sourceTree = "<group>"; };
 		A4F482581C0514E900FBA0BA /* NoticiaVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticiaVO.swift; sourceTree = "<group>"; };
+		AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuscaTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		A4F482431C05045300FBA0BA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				A4F4824D1C0505E100FBA0BA /* Setup.swift in Sources */,
 				A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */,
 				A4F482551C05111400FBA0BA /* NoticiaDAO.swift in Sources */,
+				AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */,
 				A4F482481C05057A00FBA0BA /* Tema+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

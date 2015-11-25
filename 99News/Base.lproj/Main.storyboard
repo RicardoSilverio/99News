@@ -237,7 +237,7 @@
         <!--Busca de Notícias-->
         <scene sceneID="Yx9-Ms-9YA">
             <objects>
-                <viewController title="Busca de Notícias" id="Ikx-6P-ce9" sceneMemberID="viewController">
+                <viewController title="Busca de Notícias" id="Ikx-6P-ce9" customClass="BuscaTableViewController" customModule="_9News" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="huD-XF-0vu"/>
                         <viewControllerLayoutGuide type="bottom" id="5da-kA-bwl"/>
@@ -395,6 +395,6 @@
         <image name="search" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gIx-gh-hvQ"/>
+        <segue reference="riE-Yx-l9V"/>
     </inferredMetricsTieBreakers>
 </document>
