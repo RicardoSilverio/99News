@@ -15,6 +15,7 @@ class NoticiaVO: NSObject {
     var resumo:String
     
     init(titulo:String, url:String, resumo:String) {
+        let variavel: Bool = true
         self.titulo = titulo
         self.url = url
         self.resumo = resumo
