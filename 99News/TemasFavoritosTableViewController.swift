@@ -30,6 +30,7 @@ class TemasFavoritosTableViewController: UITableViewController {
         return 0
     }
     
+    //Carrega a tabela com os valores armazenados no bd
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellID", forIndexPath: indexPath)
         let tema: Tema = temaDAO?.getFetchedResultsController().objectAtIndexPath(indexPath) as! Tema
