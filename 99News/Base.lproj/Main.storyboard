@@ -332,7 +332,7 @@
         <scene sceneID="ZnJ-bn-BZs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TFg-LD-647" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notícias Salvas" image="save" selectedImage="save" id="zBn-rg-k5T"/>
+                    <tabBarItem key="tabBarItem" title="Notícias Salvas" image="add" selectedImage="save" id="zBn-rg-k5T"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9I9-Co-h2d">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
