@@ -30,6 +30,10 @@ class TemasFavoritosTableViewController: UITableViewController {
         return 0
     }
     
-    
-    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CellID", forIndexPath: indexPath)
+        let tema: Tema = temaDAO?.getFetchedResultsController().objectAtIndexPath(indexPath) as! Tema
+        cell.textLabel?.text = tema.nome
+        return cell
+    }
 }
