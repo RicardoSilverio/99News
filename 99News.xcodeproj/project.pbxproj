@@ -18,9 +18,9 @@
 		A4F482491C05057A00FBA0BA /* Tema.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482451C05057A00FBA0BA /* Tema.swift */; };
 		A4F4824B1C05057A00FBA0BA /* Noticia.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482471C05057A00FBA0BA /* Noticia.swift */; };
 		A4F4824D1C0505E100FBA0BA /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F4824C1C0505E100FBA0BA /* Setup.swift */; };
-		A4F4824F1C050E6800FBA0BA /* TemaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F4824E1C050E6800FBA0BA /* TemaService.swift */; };
+		A4F4824F1C050E6800FBA0BA /* TemaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F4824E1C050E6800FBA0BA /* TemaDAO.swift */; };
 		A4F482531C050FB600FBA0BA /* Noticia+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482521C050FB600FBA0BA /* Noticia+CoreDataProperties.swift */; };
-		A4F482551C05111400FBA0BA /* NoticiaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482541C05111400FBA0BA /* NoticiaService.swift */; };
+		A4F482551C05111400FBA0BA /* NoticiaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482541C05111400FBA0BA /* NoticiaDAO.swift */; };
 		A4F482571C0514CB00FBA0BA /* GoogleNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */; };
 		A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482581C0514E900FBA0BA /* NoticiaVO.swift */; };
 /* End PBXBuildFile section */
@@ -60,9 +60,9 @@
 		A4F482451C05057A00FBA0BA /* Tema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tema.swift; sourceTree = "<group>"; };
 		A4F482471C05057A00FBA0BA /* Noticia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Noticia.swift; sourceTree = "<group>"; };
 		A4F4824C1C0505E100FBA0BA /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
-		A4F4824E1C050E6800FBA0BA /* TemaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemaService.swift; sourceTree = "<group>"; };
+		A4F4824E1C050E6800FBA0BA /* TemaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemaDAO.swift; sourceTree = "<group>"; };
 		A4F482521C050FB600FBA0BA /* Noticia+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Noticia+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A4F482541C05111400FBA0BA /* NoticiaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticiaService.swift; sourceTree = "<group>"; };
+		A4F482541C05111400FBA0BA /* NoticiaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticiaDAO.swift; sourceTree = "<group>"; };
 		A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleNewsService.swift; sourceTree = "<group>"; };
 		A4F482581C0514E900FBA0BA /* NoticiaVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticiaVO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,8 +154,8 @@
 				A4F482521C050FB600FBA0BA /* Noticia+CoreDataProperties.swift */,
 				A4F482471C05057A00FBA0BA /* Noticia.swift */,
 				A4F4824C1C0505E100FBA0BA /* Setup.swift */,
-				A4F4824E1C050E6800FBA0BA /* TemaService.swift */,
-				A4F482541C05111400FBA0BA /* NoticiaService.swift */,
+				A4F4824E1C050E6800FBA0BA /* TemaDAO.swift */,
+				A4F482541C05111400FBA0BA /* NoticiaDAO.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -313,10 +313,10 @@
 				A4F482571C0514CB00FBA0BA /* GoogleNewsService.swift in Sources */,
 				A4F482401C0502EC00FBA0BA /* NewsModel.xcdatamodeld in Sources */,
 				A4F482111C04F11A00FBA0BA /* AppDelegate.swift in Sources */,
-				A4F4824F1C050E6800FBA0BA /* TemaService.swift in Sources */,
+				A4F4824F1C050E6800FBA0BA /* TemaDAO.swift in Sources */,
 				A4F4824D1C0505E100FBA0BA /* Setup.swift in Sources */,
 				A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */,
-				A4F482551C05111400FBA0BA /* NoticiaService.swift in Sources */,
+				A4F482551C05111400FBA0BA /* NoticiaDAO.swift in Sources */,
 				A4F482481C05057A00FBA0BA /* Tema+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,6 +546,7 @@
 				A4F482371C04F11A00FBA0BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4F482381C04F11A00FBA0BA /* Build configuration list for PBXNativeTarget "99NewsTests" */ = {
 			isa = XCConfigurationList;
@@ -554,6 +555,7 @@
 				A4F4823A1C04F11A00FBA0BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4F4823B1C04F11A00FBA0BA /* Build configuration list for PBXNativeTarget "99NewsUITests" */ = {
 			isa = XCConfigurationList;
@@ -562,6 +564,7 @@
 				A4F4823D1C04F11A00FBA0BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -1,5 +1,5 @@
 //
-//  TemaService.swift
+//  NoticiaService.swift
 //  99News
 //
 //  Created by Ricardo Silverio de Souza on 24/11/15.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TemaService: NSObject {
+class NoticiaDAO: NSObject {
     
     private let managedObjectContext:NSManagedObjectContext
     
@@ -18,22 +18,23 @@ class TemaService: NSObject {
     }
     
     func getFetchedResultsController() -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest(entityName: "Tema")
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+        let fetchRequest = NSFetchRequest(entityName: "Noticia")
+        
+        let sortDescriptor = NSSortDescriptor(key: "dataPublicacao", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultController
     }
     
-    func isTemaSalvo(tema:Tema) -> Bool {
+    func isNoticiaSalva(noticia:Noticia) -> Bool {
         
-        let fetchRequest = NSFetchRequest(entityName: "Tema")
+        let fetchRequest = NSFetchRequest(entityName: "Noticia")
         
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "dataPublicacao", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let predicate = NSPredicate(format: "ANY nome like '" + tema.nome! + "'")
+        let predicate = NSPredicate(format: "url like '" + noticia.url! + "'")
         fetchRequest.predicate = predicate
         
         do {
@@ -42,10 +43,9 @@ class TemaService: NSObject {
                 return true
             }
         } catch {
-            print("Erro ao pesquisar tema no banco")
+            print("Erro ao pesquisar notícia no banco")
         }
         return false
     }
-
 
 }

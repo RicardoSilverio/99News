@@ -304,14 +304,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="693-xi-p64" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="roA-xx-dY0">
-                    <connections>
-                        <outlet property="delegate" destination="Ikx-6P-ce9" id="Z3N-Vy-pcF"/>
-                        <outlet property="searchContentsController" destination="Ikx-6P-ce9" id="Sep-DH-Nii"/>
-                        <outlet property="searchResultsDataSource" destination="Ikx-6P-ce9" id="1fE-vx-ua1"/>
-                        <outlet property="searchResultsDelegate" destination="Ikx-6P-ce9" id="Dgf-jc-0RS"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2090" y="197"/>
         </scene>
@@ -398,6 +390,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="riE-Yx-l9V"/>
+        <segue reference="gIx-gh-hvQ"/>
     </inferredMetricsTieBreakers>
 </document>

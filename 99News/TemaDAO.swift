@@ -1,5 +1,5 @@
 //
-//  NoticiaService.swift
+//  TemaService.swift
 //  99News
 //
 //  Created by Ricardo Silverio de Souza on 24/11/15.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class NoticiaService: NSObject {
+class TemaDAO: NSObject {
     
     private let managedObjectContext:NSManagedObjectContext
     
@@ -18,23 +18,22 @@ class NoticiaService: NSObject {
     }
     
     func getFetchedResultsController() -> NSFetchedResultsController {
-        let fetchRequest = NSFetchRequest(entityName: "Noticia")
-        
-        let sortDescriptor = NSSortDescriptor(key: "dataPublicacao", ascending: false)
+        let fetchRequest = NSFetchRequest(entityName: "Tema")
+        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultController
     }
     
-    func isNoticiaSalva(noticia:Noticia) -> Bool {
+    func isTemaSalvo(tema:Tema) -> Bool {
         
-        let fetchRequest = NSFetchRequest(entityName: "Noticia")
+        let fetchRequest = NSFetchRequest(entityName: "Tema")
         
-        let sortDescriptor = NSSortDescriptor(key: "dataPublicacao", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let predicate = NSPredicate(format: "url like '" + noticia.url! + "'")
+        let predicate = NSPredicate(format: "ANY nome like '" + tema.nome! + "'")
         fetchRequest.predicate = predicate
         
         do {
@@ -43,9 +42,10 @@ class NoticiaService: NSObject {
                 return true
             }
         } catch {
-            print("Erro ao pesquisar notícia no banco")
+            print("Erro ao pesquisar tema no banco")
         }
         return false
     }
+
 
 }
