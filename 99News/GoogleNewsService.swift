@@ -118,6 +118,7 @@ class GoogleNewsService: NSObject {
         }
     }
     
+    //
     private func processarPagina(results:[[String:AnyObject]]) {
         for item in results {
             var imagemURL: String?

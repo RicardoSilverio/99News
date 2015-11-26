@@ -14,6 +14,7 @@ class NoticiaVO: NSObject {
     var url:String
     var resumo:String
     var imagemURL:String?
+    //
     
     init(titulo:String, url:String, resumo:String, imagem:String?) {
         self.titulo = titulo

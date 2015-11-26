@@ -75,6 +75,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         longPress.minimumPressDuration = 1
         longPress.noticia? = noticia
         cell.addGestureRecognizer(longPress)
+        ///
         
         cell.textLabel!.text = noticia.titulo
         cell.detailTextLabel!.text = noticia.resumo

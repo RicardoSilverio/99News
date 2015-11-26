@@ -12,4 +12,5 @@ class MyLongPress: UILongPressGestureRecognizer {
 
     var noticia:NoticiaVO?
     
+    //
 }

@@ -11,9 +11,10 @@ import UIKit
 class DownloadImagem: NSObject {
 
     class func downloadImage(imgURL: String, celula:UITableViewCell){
-        let url = NSURL(string: imgURL)!
+        //Componente https://github.com/Haneke/HanekeSwift 
+        let imagemURL = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Legal-claims-software.jpg")!
         let imageSession = NSURLSession.sharedSession()
-        let imgTask = imageSession.downloadTaskWithURL(url) {(url, response, error) -> Void in
+        let imgTask = imageSession.downloadTaskWithURL(imagemURL) {(url, response, error) -> Void in
             if( error == nil){
                 if let imageData = NSData(contentsOfURL: url!){
                     
@@ -28,6 +29,7 @@ class DownloadImagem: NSObject {
         }
         imgTask.resume()
         
+        //
     }
     
 }
