@@ -250,14 +250,20 @@
                                 <rect key="frame" x="0.0" y="64" width="269" height="44"/>
                                 <animations/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ikx-6P-ce9" id="59s-jy-nov"/>
+                                </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hey-HD-hCi">
                                 <rect key="frame" x="269" y="64" width="51" height="44"/>
                                 <animations/>
                                 <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="adicionarFavoritos:" destination="Ikx-6P-ce9" eventType="touchUpInside" id="c85-2r-JGD"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1wm-Ih-og8">
-                                <rect key="frame" x="0.0" y="108" width="320" height="411"/>
+                                <rect key="frame" x="0.0" y="116" width="320" height="403"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -290,6 +296,10 @@
                                         <animations/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ikx-6P-ce9" id="rIZ-nC-2xH"/>
+                                    <outlet property="delegate" destination="Ikx-6P-ce9" id="qXK-sp-LwA"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -300,6 +310,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="campoBusca" destination="ZBi-wa-Iys" id="dBS-jv-BkS"/>
+                        <outlet property="tableView" destination="1wm-Ih-og8" id="hmX-I6-IGn"/>
                         <segue destination="JVN-zN-cg9" kind="show" id="riE-Yx-l9V"/>
                     </connections>
                 </viewController>

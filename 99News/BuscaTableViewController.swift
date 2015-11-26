@@ -8,8 +8,15 @@
 
 import UIKit
 
-class BuscaTableViewController: UITableViewController {
+class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, GoogleNewsServiceDelegate {
 
+    @IBOutlet weak var campoBusca: UISearchBar!
+    
+    @IBOutlet weak var tableView: UITableView!
+    var noticias: [NoticiaVO] = []
+    
+    var requisicao: GoogleNewsService?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +27,29 @@ class BuscaTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    func pesquisaCompletada(resultados: [NoticiaVO]) {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.noticias = resultados
+            self.tableView.reloadData()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        requisicao = GoogleNewsService(query: searchBar.text!, limiteInicial: 5)
+        requisicao!.delegate = self
+        requisicao!.executarPesquisa()
+        
+    }
+    
+    @IBAction func adicionarFavoritos(sender: UIButton) {
+        
+    }
+    
+    func salvaNoticia(gesture: MyLongPress){
+        //gesture.noticia
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -27,25 +57,33 @@ class BuscaTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return noticias.count
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CellArtigo", forIndexPath: indexPath)
+        let noticia = noticias[indexPath.row]
+        let longPress = MyLongPress(target: self, action: "salvaNoticia:")
+        longPress.minimumPressDuration = 1
+        longPress.noticia? = noticia
+        cell.addGestureRecognizer(longPress)
+        
+        cell.textLabel!.text = noticia.titulo
+        cell.detailTextLabel!.text = noticia.resumo
+        if(noticia.imagemURL != nil){
+            DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
+        }
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

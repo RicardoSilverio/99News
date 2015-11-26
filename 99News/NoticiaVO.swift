@@ -13,12 +13,13 @@ class NoticiaVO: NSObject {
     var titulo:String
     var url:String
     var resumo:String
+    var imagemURL:String?
     
-    init(titulo:String, url:String, resumo:String) {
-        let variavel: Bool = true
+    init(titulo:String, url:String, resumo:String, imagem:String?) {
         self.titulo = titulo
         self.url = url
         self.resumo = resumo
+        self.imagemURL = imagem
     }
 
 }

@@ -12,11 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let news:GoogleNewsService = GoogleNewsService(query: "brasil", limiteInicial: 36)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        news.executarPesquisa()
         return true
     }
 
@@ -31,8 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        news.limite = 50
-        news.requisitarProximaPagina()
+
     }
 
     func applicationDidBecomeActive(application: UIApplication) {

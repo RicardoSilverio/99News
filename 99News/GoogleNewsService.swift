@@ -120,7 +120,11 @@ class GoogleNewsService: NSObject {
     
     private func processarPagina(results:[[String:AnyObject]]) {
         for item in results {
-            let noticia:NoticiaVO = NoticiaVO(titulo: item["titleNoFormatting"] as! String, url: item["unescapedUrl"] as! String, resumo: convertSpecialCharacters(item["content"] as! String))
+            var imagemURL: String?
+            if let imageDic: [String: AnyObject] = item["image"] as? [String: AnyObject]{
+                imagemURL = imageDic["url"] as! String
+            }
+            let noticia:NoticiaVO = NoticiaVO(titulo: convertSpecialCharacters(item["titleNoFormatting"] as! String), url: item["unescapedUrl"] as! String, resumo: convertSpecialCharacters(item["content"] as! String), imagem: imagemURL)
             resultadosNoticia.append(noticia)
             print(noticia.titulo + " (\(noticia.url) [\(noticia.resumo)]")
         }
