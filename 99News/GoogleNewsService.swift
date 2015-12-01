@@ -52,7 +52,7 @@ class GoogleNewsService: NSObject {
                     if let responseData = json["responseData"] as? [String:AnyObject] {
                         
                         if let cursor = responseData["cursor"] as? [String:AnyObject] {
-                            if let pages = cursor["pages"] as? [[String:AnyObject]] {
+                            if let _ = cursor["pages"] as? [[String:AnyObject]] {
                                 self.totalPaginas = 15
                             } else {
                                 self.totalPaginas = 0
@@ -89,12 +89,13 @@ class GoogleNewsService: NSObject {
             let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
                 if(error != nil) {
                     print("Erro na requisição do json: Requisição de Página de Resultados - \(self.paginaAtual!)" )
+                    print(error)
                 } else {
                     do {
                         let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
                         if let responseData = json["responseData"] as? [String:AnyObject] {
                             
-                            if let cursor = responseData["cursor"] as? [String:AnyObject] {
+                            if let _ = responseData["cursor"] as? [String:AnyObject] {
                                 if let results = responseData["results"] as? [[String:AnyObject]] {
                                     if(results.count > 0) {
                                         self.processarPagina(results)
@@ -118,14 +119,13 @@ class GoogleNewsService: NSObject {
         }
     }
     
-    //
     private func processarPagina(results:[[String:AnyObject]]) {
         for item in results {
             var imagemURL: String?
             if let imageDic: [String: AnyObject] = item["image"] as? [String: AnyObject]{
-                imagemURL = imageDic["url"] as! String
+                imagemURL = imageDic["url"] as? String
             }
-            let noticia:NoticiaVO = NoticiaVO(titulo: convertSpecialCharacters(item["titleNoFormatting"] as! String), url: item["unescapedUrl"] as! String, resumo: convertSpecialCharacters(item["content"] as! String), imagem: imagemURL)
+            let noticia:NoticiaVO = NoticiaVO(titulo: convertSpecialCharacters(item["titleNoFormatting"] as! String), url: item["unescapedUrl"] as! String, resumo: convertSpecialCharacters(item["content"] as! String), imagem: imagemURL, dataPublicacao:nil)
             resultadosNoticia.append(noticia)
             print(noticia.titulo + " (\(noticia.url) [\(noticia.resumo)]")
         }
@@ -133,7 +133,7 @@ class GoogleNewsService: NSObject {
     
     func convertSpecialCharacters(string: String) -> String {
         var newString = string
-        var char_dictionary = [
+        let char_dictionary = [
             "&amp;": "&",
             "&lt;": "<",
             "&gt;": ">",

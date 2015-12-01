@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4493C7D1C0DE186000F243C /* TemasFavoritosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4493C7C1C0DE186000F243C /* TemasFavoritosTableViewController.swift */; };
+		A4493C7F1C0DE3DD000F243C /* ExtractService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4493C7E1C0DE3DD000F243C /* ExtractService.swift */; };
 		A4F482111C04F11A00FBA0BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482101C04F11A00FBA0BA /* AppDelegate.swift */; };
 		A4F482161C04F11A00FBA0BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4F482141C04F11A00FBA0BA /* Main.storyboard */; };
 		A4F482181C04F11A00FBA0BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4F482171C04F11A00FBA0BA /* Assets.xcassets */; };
@@ -23,10 +25,10 @@
 		A4F482551C05111400FBA0BA /* NoticiaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482541C05111400FBA0BA /* NoticiaDAO.swift */; };
 		A4F482571C0514CB00FBA0BA /* GoogleNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */; };
 		A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482581C0514E900FBA0BA /* NoticiaVO.swift */; };
-		AC54CC641C067E670093EA1C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC54CC631C067E670093EA1C /* Reachability.swift */; settings = {ASSET_TAGS = (); }; };
-		AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		AC57D5FE1C067A3C00D6C4E0 /* MyLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */; settings = {ASSET_TAGS = (); }; };
-		AC57D6001C067EF400D6C4E0 /* DownloadImagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */; settings = {ASSET_TAGS = (); }; };
+		AC54CC641C067E670093EA1C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC54CC631C067E670093EA1C /* Reachability.swift */; };
+		AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */; };
+		AC57D5FE1C067A3C00D6C4E0 /* MyLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */; };
+		AC57D6001C067EF400D6C4E0 /* DownloadImagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4493C7C1C0DE186000F243C /* TemasFavoritosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemasFavoritosTableViewController.swift; sourceTree = "<group>"; };
+		A4493C7E1C0DE3DD000F243C /* ExtractService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtractService.swift; sourceTree = "<group>"; };
 		A4F4820D1C04F11A00FBA0BA /* 99News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 99News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F482101C04F11A00FBA0BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4F482151C04F11A00FBA0BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */,
 				A4F482581C0514E900FBA0BA /* NoticiaVO.swift */,
 				AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */,
+				A4493C7E1C0DE3DD000F243C /* ExtractService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 		A4F482431C05045300FBA0BA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A4493C7C1C0DE186000F243C /* TemasFavoritosTableViewController.swift */,
 				AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */,
 				AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */,
 			);
@@ -319,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4493C7D1C0DE186000F243C /* TemasFavoritosTableViewController.swift in Sources */,
 				A4F482491C05057A00FBA0BA /* Tema.swift in Sources */,
 				A4F4824B1C05057A00FBA0BA /* Noticia.swift in Sources */,
 				A4F482531C050FB600FBA0BA /* Noticia+CoreDataProperties.swift in Sources */,
@@ -326,6 +333,7 @@
 				A4F482401C0502EC00FBA0BA /* NewsModel.xcdatamodeld in Sources */,
 				A4F482111C04F11A00FBA0BA /* AppDelegate.swift in Sources */,
 				A4F4824F1C050E6800FBA0BA /* TemaDAO.swift in Sources */,
+				A4493C7F1C0DE3DD000F243C /* ExtractService.swift in Sources */,
 				A4F4824D1C0505E100FBA0BA /* Setup.swift in Sources */,
 				A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */,
 				A4F482551C05111400FBA0BA /* NoticiaDAO.swift in Sources */,
