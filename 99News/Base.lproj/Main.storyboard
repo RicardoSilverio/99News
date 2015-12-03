@@ -340,6 +340,34 @@
             </objects>
             <point key="canvasLocation" x="738" y="528"/>
         </scene>
+        <!--Teste-->
+        <scene sceneID="tCW-J6-KLh">
+            <objects>
+                <viewController title="Teste" id="GqG-3L-yiw" customClass="TestHTMLViewController" customModule="_9News" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vw5-L9-c5K"/>
+                        <viewControllerLayoutGuide type="bottom" id="An0-aH-nzY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NoX-5T-awM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnB-6J-dOF">
+                                <rect key="frame" x="-5" y="28" width="325" height="540"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="webView" destination="vnB-6J-dOF" id="yU0-cF-B98"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="baY-Zx-3M9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="850" y="-600"/>
+        </scene>
         <!--Notícias Salvas-->
         <scene sceneID="ZnJ-bn-BZs">
             <objects>

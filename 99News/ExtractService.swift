@@ -57,7 +57,7 @@ class ExtractService: NSObject {
                 } else {
                     date = NSDate()
                 }
-                self.delegate?.requisicaoCompletada(NoticiaVO(titulo: title, url: originalURL, resumo: content!, imagem: nil, dataPublicacao: date))
+                self.delegate?.requisicaoCompletada(NoticiaVO(titulo: title, url: originalURL, resumo: content!, imagem: nil, dataPublicacao: date, celula: nil))
             } catch {
                 print("Erro na serialização do json: API Extract")
             }

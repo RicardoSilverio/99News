@@ -35,7 +35,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        requisicao = GoogleNewsService(query: searchBar.text!, limiteInicial: 5)
+        requisicao = GoogleNewsService(query: searchBar.text!)
         requisicao!.delegate = self
         requisicao!.executarPesquisa()
         
@@ -46,6 +46,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func salvaNoticia(gesture: MyLongPress){
+        tableView.cellForRowAtIndexPath((gesture.noticia?.celula)!)?.backgroundColor = UIColor.redColor()
         //gesture.noticia
     }
     
@@ -70,10 +71,11 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellArtigo", forIndexPath: indexPath)
-        let noticia = noticias[indexPath.row]
+        let noticia: NoticiaVO = noticias[indexPath.row]
         let longPress = MyLongPress(target: self, action: "salvaNoticia:")
         longPress.minimumPressDuration = 1
-        longPress.noticia? = noticia
+        noticia.celula = indexPath
+        longPress.noticia = noticia
         cell.addGestureRecognizer(longPress)
         ///
         

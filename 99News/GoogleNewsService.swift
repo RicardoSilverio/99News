@@ -15,21 +15,18 @@ protocol GoogleNewsServiceDelegate {
 
 class GoogleNewsService: NSObject {
     
-    private static let urlAPI:String = "https://ajax.googleapis.com/ajax/services/search/news?v=1.0"
+    private static let urlAPI:String = "http://api.nytimes.com/svc/search/v2/articlesearch.json"
+    private static let keyAPI:String = "&api-key=cec18c0680847cc777aeb0be63e99fc5:6:73646062"
+    private var pageCount:Int = 0
     private var session:NSURLSession?
     
     var delegate:GoogleNewsServiceDelegate?
     
-    private var paginaAtual:Int?
-    private var totalPaginas:Int?
-    
-    var limite:Int
     private var query:String
     private var resultadosNoticia:[NoticiaVO] = []
     
-    init(query:String, limiteInicial:Int) {
+    init(query:String) {
         self.query = query
-        self.limite = limiteInicial
         
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         self.session = NSURLSession(configuration: sessionConfig)
@@ -38,10 +35,8 @@ class GoogleNewsService: NSObject {
     func executarPesquisa() {
         
         self.resultadosNoticia.removeAll()
-        self.totalPaginas = 0
-        self.paginaAtual = 1
         
-        let urlRequest = NSURL(string: GoogleNewsService.urlAPI + "&q=" + query)
+        let urlRequest = NSURL(string: GoogleNewsService.urlAPI + "?q=" + query + "&page=0" + GoogleNewsService.keyAPI)
         let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
             if(error != nil) {
                 print("Erro na requisição do json: Pesquisa Inicial de Notícias")
@@ -49,24 +44,15 @@ class GoogleNewsService: NSObject {
                 
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                    if let responseData = json["responseData"] as? [String:AnyObject] {
-                        
-                        if let cursor = responseData["cursor"] as? [String:AnyObject] {
-                            if let _ = cursor["pages"] as? [[String:AnyObject]] {
-                                self.totalPaginas = 15
-                            } else {
-                                self.totalPaginas = 0
-                            }
-                        }
-                        
-                        if let results = responseData["results"] as? [[String:AnyObject]] {
+                    if let responseData = json["response"] as? [String:AnyObject] {
+
+                        if let results = responseData["docs"] as? [[String:AnyObject]] {
                             if(results.count > 0) {
                                 self.processarPagina(results)
-                            }
-                            if(self.resultadosNoticia.count < self.limite && self.totalPaginas > 1) {
-                                self.requisitarProximaPagina()
-                            } else {
                                 self.delegate?.pesquisaCompletada(self.resultadosNoticia)
+                            }
+                            else{
+                                // sem registros
                             }
                         }
                         
@@ -83,49 +69,61 @@ class GoogleNewsService: NSObject {
     }
     
     func requisitarProximaPagina() {
-        if(self.resultadosNoticia.count < self.limite && self.totalPaginas > paginaAtual) {
-            self.paginaAtual = self.paginaAtual! + 1
-            let urlRequest = NSURL(string: GoogleNewsService.urlAPI + "&q=" + query + "&start=\(self.resultadosNoticia.count)")
-            let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-                if(error != nil) {
-                    print("Erro na requisição do json: Requisição de Página de Resultados - \(self.paginaAtual!)" )
-                    print(error)
-                } else {
-                    do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                        if let responseData = json["responseData"] as? [String:AnyObject] {
-                            
-                            if let _ = responseData["cursor"] as? [String:AnyObject] {
-                                if let results = responseData["results"] as? [[String:AnyObject]] {
-                                    if(results.count > 0) {
-                                        self.processarPagina(results)
-                                    }
-                                    if(self.resultadosNoticia.count < self.limite && self.totalPaginas > self.paginaAtual) {
-                                        self.requisitarProximaPagina()
-                                    } else {
-                                        self.delegate?.pesquisaCompletada(self.resultadosNoticia)
-                                    }
-                                }
-                            }
-                        }
-                    } catch {
-                        print("Erro na serialização do json: Requisição de Página de Resultados - \(self.paginaAtual!)")
-                    }
-                }
-            })
-            task?.resume()
-        } else {
-            self.delegate?.pesquisaCompletada(self.resultadosNoticia)
-        }
+      self.pageCount = self.pageCount + 1
+        
+      let urlRequest = NSURL(string: GoogleNewsService.urlAPI + "&q=" + query + "&page=" + "\(self.pageCount)" + GoogleNewsService.keyAPI) //"&start=\(self.resultadosNoticia.count)")
+      let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+          if(error != nil) {
+              print("Erro na requisição do json: Requisição de Página de Resultados - \(self.pageCount)" )
+              print(error)
+          } else {
+              do {
+                  let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                  if let responseData = json["response"] as? [String:AnyObject] {
+                      
+                          if let results = responseData["docs"] as? [[String:AnyObject]] {
+                              if(results.count > 0) {
+                                  self.processarPagina(results)
+                                  self.delegate?.pesquisaCompletada(self.resultadosNoticia)
+                              }
+                              else{
+                                  //sem registros
+                              }
+                          }
+                  }
+              } catch {
+                  print("Erro na serialização do json: Requisição de Página de Resultados - \(self.pageCount)")
+              }
+          }
+      })
+      task?.resume()
     }
     
     private func processarPagina(results:[[String:AnyObject]]) {
         for item in results {
+
             var imagemURL: String?
-            if let imageDic: [String: AnyObject] = item["image"] as? [String: AnyObject]{
-                imagemURL = imageDic["url"] as? String
+            var titulo: String = ""
+            var subtitulo: String = ""
+            
+            if let header: [String: AnyObject] = item["headline"] as? [String: AnyObject]{
+                titulo = header["main"] as! String
             }
-            let noticia:NoticiaVO = NoticiaVO(titulo: convertSpecialCharacters(item["titleNoFormatting"] as! String), url: item["unescapedUrl"] as! String, resumo: convertSpecialCharacters(item["content"] as! String), imagem: imagemURL, dataPublicacao:nil)
+            if let sub: String = item["snippet"] as? String{
+                subtitulo = sub
+            }
+            
+            if let imagens: [[String: AnyObject]] = item["multimedia"] as? [[String: AnyObject]]{
+                if imagens.count > 0{
+                    if let imagem: String = imagens[0]["url"] as? String{
+                        imagemURL = "http://www.nytimes.com/" + imagem
+                    }
+                }
+            }
+            let noticia:NoticiaVO = NoticiaVO(titulo: titulo,
+                                              url: item["web_url"] as! String,
+                                              resumo: subtitulo,
+                imagem: imagemURL, dataPublicacao:nil, celula: nil)
             resultadosNoticia.append(noticia)
             print(noticia.titulo + " (\(noticia.url) [\(noticia.resumo)]")
         }

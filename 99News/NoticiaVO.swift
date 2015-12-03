@@ -15,13 +15,15 @@ class NoticiaVO: NSObject {
     var resumo:String
     var imagemURL:String?
     var dataPublicacao:NSDate?
+    var celula:NSIndexPath?
     
-    init(titulo:String, url:String, resumo:String, imagem:String?, dataPublicacao:NSDate?) {
+    init(titulo:String, url:String, resumo:String, imagem:String?, dataPublicacao:NSDate?, celula:NSIndexPath?) {
         self.titulo = titulo
         self.url = url
         self.resumo = resumo
         self.imagemURL = imagem
         self.dataPublicacao = dataPublicacao
+        self.celula = celula
     }
 
 }
