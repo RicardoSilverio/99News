@@ -30,8 +30,7 @@
 		AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */; };
 		AC57D5FE1C067A3C00D6C4E0 /* MyLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */; };
 		AC57D6001C067EF400D6C4E0 /* DownloadImagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */; };
-		ACECB1251C0F8F2D00588ECD /* HTMLFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECB1241C0F8F2D00588ECD /* HTMLFileService.swift */; settings = {ASSET_TAGS = (); }; };
-		ACECB1271C0F90DE00588ECD /* TestHTMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECB1261C0F90DE00588ECD /* TestHTMLViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		ACECB1251C0F8F2D00588ECD /* HTMLFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECB1241C0F8F2D00588ECD /* HTMLFileService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +108,6 @@
 		AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLongPress.swift; sourceTree = "<group>"; };
 		AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImagem.swift; sourceTree = "<group>"; };
 		ACECB1241C0F8F2D00588ECD /* HTMLFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLFileService.swift; sourceTree = "<group>"; };
-		ACECB1261C0F90DE00588ECD /* TestHTMLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHTMLViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +176,6 @@
 				A4F482191C04F11A00FBA0BA /* LaunchScreen.storyboard */,
 				A4F4821C1C04F11A00FBA0BA /* Info.plist */,
 				A4F4823E1C0502EC00FBA0BA /* NewsModel.xcdatamodeld */,
-				ACECB1261C0F90DE00588ECD /* TestHTMLViewController.swift */,
 			);
 			path = 99News;
 			sourceTree = "<group>";
@@ -403,7 +400,6 @@
 				AC57D5FE1C067A3C00D6C4E0 /* MyLongPress.swift in Sources */,
 				AC57D6001C067EF400D6C4E0 /* DownloadImagem.swift in Sources */,
 				AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */,
-				ACECB1271C0F90DE00588ECD /* TestHTMLViewController.swift in Sources */,
 				A4F482481C05057A00FBA0BA /* Tema+CoreDataProperties.swift in Sources */,
 				AC54CC641C067E670093EA1C /* Reachability.swift in Sources */,
 			);
