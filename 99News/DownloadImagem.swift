@@ -11,8 +11,8 @@ import UIKit
 class DownloadImagem: NSObject {
 
     class func downloadImage(imgURL: String, celula:UITableViewCell){
-        //Componente https://github.com/Haneke/HanekeSwift 
-        let imagemURL = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Legal-claims-software.jpg")!
+        
+        let imagemURL = NSURL(string: imgURL)!
         let imageSession = NSURLSession.sharedSession()
         let imgTask = imageSession.downloadTaskWithURL(imagemURL) {(url, response, error) -> Void in
             if( error == nil){
