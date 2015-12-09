@@ -46,7 +46,10 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func salvaNoticia(gesture: MyLongPress){
-        tableView.cellForRowAtIndexPath((gesture.noticia?.celula)!)?.backgroundColor = UIColor.redColor()
+        let cell =  tableView.cellForRowAtIndexPath((gesture.noticia?.celula)!)
+        cell?.textLabel?.backgroundColor = UIColor.redColor()
+        cell?.detailTextLabel?.backgroundColor = UIColor.redColor()
+        cell?.backgroundColor = UIColor.redColor()
         //gesture.noticia
     }
     
