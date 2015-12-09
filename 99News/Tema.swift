@@ -14,9 +14,9 @@ class Tema: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     
-    class func getNewTema(managedObjectContext:NSManagedObjectContext) -> Noticia {
+    class func getNewTema(managedObjectContext:NSManagedObjectContext) -> Tema {
         let entityDescription = NSEntityDescription.entityForName("Tema", inManagedObjectContext: managedObjectContext)
-        return Noticia(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext)
+        return Tema(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext)
     }
 
 }

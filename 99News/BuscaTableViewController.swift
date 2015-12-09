@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate {
 
@@ -46,13 +47,40 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func salvaNoticia(gesture: MyLongPress){
-        let cell =  tableView.cellForRowAtIndexPath((gesture.noticia?.celula)!)
-        cell?.textLabel?.backgroundColor = UIColor.redColor()
-        cell?.detailTextLabel?.backgroundColor = UIColor.redColor()
-        cell?.backgroundColor = UIColor.redColor()
+        if(Reachability.isConnectedToNetwork()){
+            var managedObjectContext:NSManagedObjectContext?
+        
+            managedObjectContext = Setup.getManagedObjectContext()
+        
+            let newNoticia:Noticia = Noticia.getNewNoticia((managedObjectContext)!)
+        
+            newNoticia.titulo = gesture.noticia?.titulo
+            newNoticia.url = gesture.noticia?.url
+            newNoticia.conteudo = gesture.noticia?.resumo
+        
+            do{
+                try managedObjectContext!.save()
+                let cell =  tableView.cellForRowAtIndexPath((gesture.noticia?.celula)!)
+//                cell?.textLabel?.backgroundColor = UIColor.redColor()
+//                cell?.detailTextLabel?.backgroundColor = UIColor.redColor()
+                cell?.backgroundColor = UIColor.redColor()
+            
+            }catch{
+                alerta("Não foi possível salvar", titulo: "Erro", botao: "Ok")
+            }
+        }
+        else{
+            alerta("Não há conexão com a internet, tentar mais tarde!", titulo: "Atenção", botao: "Ok")
+        }
         //gesture.noticia
     }
     
+    
+    func alerta(mensagem: String, titulo: String, botao: String){
+        let alert = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: botao, style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,7 +112,10 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         cell.textLabel!.text = noticia.titulo
         cell.detailTextLabel!.text = noticia.resumo
+        cell.textLabel?.backgroundColor = UIColor.clearColor()
+        cell.detailTextLabel?.backgroundColor = UIColor.clearColor()
         if(noticia.imagemURL != nil){
+            cell.imageView?.image = UIImage(named: "save")
             DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
         }
         return cell
