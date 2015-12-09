@@ -9,27 +9,25 @@
 import UIKit
 
 class WebViewController: UIViewController {
-
+    
+    var noticiaUrl:String?
+    @IBOutlet weak var noticiaWebView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //Carrega o webview com a url da Noticia, caso a mesma não seja nula
+        if(nil != noticiaUrl){
+            let url = NSURL(string: noticiaUrl!)
+            let request = NSURLRequest(URL: url!)
+            self.noticiaWebView.loadRequest(request)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
