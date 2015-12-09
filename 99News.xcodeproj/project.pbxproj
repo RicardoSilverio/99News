@@ -48,13 +48,6 @@
 			remoteGlobalIDString = A4F4820C1C04F11A00FBA0BA;
 			remoteInfo = 99News;
 		};
-		ACE921411C18D4D5009F1094 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4D3617D1C0F2C5400B37670 /* Haneke.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A095C9561980418C00CD0F4C;
-			remoteInfo = Haneke;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,7 +65,6 @@
 /* Begin PBXFileReference section */
 		A4493C7C1C0DE186000F243C /* TemasFavoritosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemasFavoritosTableViewController.swift; sourceTree = "<group>"; };
 		A4493C7E1C0DE3DD000F243C /* ExtractService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtractService.swift; sourceTree = "<group>"; };
-		A4D3617D1C0F2C5400B37670 /* Haneke.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Haneke.xcodeproj; path = ../HanekeSwift/Haneke.xcodeproj; sourceTree = "<group>"; };
 		A4F4820D1C04F11A00FBA0BA /* 99News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 99News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F482101C04F11A00FBA0BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4F482151C04F11A00FBA0BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -151,7 +143,6 @@
 		A4F4820F1C04F11A00FBA0BA /* 99News */ = {
 			isa = PBXGroup;
 			children = (
-				A4D3617D1C0F2C5400B37670 /* Haneke.xcodeproj */,
 				A4F482431C05045300FBA0BA /* Controller */,
 				A4F482421C05043800FBA0BA /* Service */,
 				A4F482411C05041600FBA0BA /* Model */,
@@ -219,14 +210,6 @@
 				ACE9213C1C18D24F009F1094 /* WebViewController.swift */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		ACE9213E1C18D4D5009F1094 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				ACE921421C18D4D5009F1094 /* Haneke.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,12 +303,6 @@
 			mainGroup = A4F482041C04F11A00FBA0BA;
 			productRefGroup = A4F4820E1C04F11A00FBA0BA /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = ACE9213E1C18D4D5009F1094 /* Products */;
-					ProjectRef = A4D3617D1C0F2C5400B37670 /* Haneke.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				A4F4820C1C04F11A00FBA0BA /* 99News */,
@@ -334,16 +311,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		ACE921421C18D4D5009F1094 /* Haneke.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Haneke.framework;
-			remoteRef = ACE921411C18D4D5009F1094 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A4F4820B1C04F11A00FBA0BA /* Resources */ = {
