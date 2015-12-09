@@ -8,14 +8,14 @@
 
 import UIKit
 
-class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, GoogleNewsServiceDelegate {
+class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate {
 
     @IBOutlet weak var campoBusca: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     var noticias: [NoticiaVO] = []
     
-    var requisicao: GoogleNewsService?
+    var requisicao: NYTimesService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        requisicao = GoogleNewsService(query: searchBar.text!)
+        requisicao = NYTimesService(query: searchBar.text!)
         requisicao!.delegate = self
         requisicao!.executarPesquisa()
         

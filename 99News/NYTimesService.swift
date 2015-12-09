@@ -1,5 +1,5 @@
 //
-//  GoogleNewsService.swift
+//  NYTimesService.swift
 //  99News
 //
 //  Created by Ricardo Silverio de Souza on 24/11/15.
@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol GoogleNewsServiceDelegate {
+protocol NYTimesServiceDelegate {
     
     func pesquisaCompletada(resultados:[NoticiaVO])
 }
 
-class GoogleNewsService: NSObject {
+class NYTimesService: NSObject {
     
     private static let urlAPI:String = "http://api.nytimes.com/svc/search/v2/articlesearch.json"
     private static let keyAPI:String = "&api-key=cec18c0680847cc777aeb0be63e99fc5:6:73646062"
     private var pageCount:Int = 0
     private var session:NSURLSession?
     
-    var delegate:GoogleNewsServiceDelegate?
+    var delegate:NYTimesServiceDelegate?
     
     private var query:String
     private var resultadosNoticia:[NoticiaVO] = []
@@ -36,7 +36,7 @@ class GoogleNewsService: NSObject {
         
         self.resultadosNoticia.removeAll()
         
-        let urlRequest = NSURL(string: GoogleNewsService.urlAPI + "?q=" + query + "&page=0" + GoogleNewsService.keyAPI)
+        let urlRequest = NSURL(string: NYTimesService.urlAPI + "?q=" + query + "&page=0" + NYTimesService.keyAPI)
         let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
             if(error != nil) {
                 print("Erro na requisição do json: Pesquisa Inicial de Notícias")
@@ -71,7 +71,7 @@ class GoogleNewsService: NSObject {
     func requisitarProximaPagina() {
       self.pageCount = self.pageCount + 1
         
-      let urlRequest = NSURL(string: GoogleNewsService.urlAPI + "&q=" + query + "&page=" + "\(self.pageCount)" + GoogleNewsService.keyAPI) //"&start=\(self.resultadosNoticia.count)")
+      let urlRequest = NSURL(string: NYTimesService.urlAPI + "&q=" + query + "&page=" + "\(self.pageCount)" + NYTimesService.keyAPI) //"&start=\(self.resultadosNoticia.count)")
       let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
           if(error != nil) {
               print("Erro na requisição do json: Requisição de Página de Resultados - \(self.pageCount)" )

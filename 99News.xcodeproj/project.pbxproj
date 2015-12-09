@@ -24,7 +24,7 @@
 		A4F4824F1C050E6800FBA0BA /* TemaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F4824E1C050E6800FBA0BA /* TemaDAO.swift */; };
 		A4F482531C050FB600FBA0BA /* Noticia+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482521C050FB600FBA0BA /* Noticia+CoreDataProperties.swift */; };
 		A4F482551C05111400FBA0BA /* NoticiaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482541C05111400FBA0BA /* NoticiaDAO.swift */; };
-		A4F482571C0514CB00FBA0BA /* GoogleNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */; };
+		A4F482571C0514CB00FBA0BA /* NYTimesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482561C0514CB00FBA0BA /* NYTimesService.swift */; };
 		A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F482581C0514E900FBA0BA /* NoticiaVO.swift */; };
 		AC54CC641C067E670093EA1C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC54CC631C067E670093EA1C /* Reachability.swift */; };
 		AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */; };
@@ -101,7 +101,7 @@
 		A4F4824E1C050E6800FBA0BA /* TemaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemaDAO.swift; sourceTree = "<group>"; };
 		A4F482521C050FB600FBA0BA /* Noticia+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Noticia+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A4F482541C05111400FBA0BA /* NoticiaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticiaDAO.swift; sourceTree = "<group>"; };
-		A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleNewsService.swift; sourceTree = "<group>"; };
+		A4F482561C0514CB00FBA0BA /* NYTimesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTimesService.swift; sourceTree = "<group>"; };
 		A4F482581C0514E900FBA0BA /* NoticiaVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticiaVO.swift; sourceTree = "<group>"; };
 		AC54CC631C067E670093EA1C /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuscaTableViewController.swift; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				AC54CC631C067E670093EA1C /* Reachability.swift */,
-				A4F482561C0514CB00FBA0BA /* GoogleNewsService.swift */,
+				A4F482561C0514CB00FBA0BA /* NYTimesService.swift */,
 				A4F482581C0514E900FBA0BA /* NoticiaVO.swift */,
 				AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */,
 				A4493C7E1C0DE3DD000F243C /* ExtractService.swift */,
@@ -389,7 +389,7 @@
 				ACECB1251C0F8F2D00588ECD /* HTMLFileService.swift in Sources */,
 				A4F4824B1C05057A00FBA0BA /* Noticia.swift in Sources */,
 				A4F482531C050FB600FBA0BA /* Noticia+CoreDataProperties.swift in Sources */,
-				A4F482571C0514CB00FBA0BA /* GoogleNewsService.swift in Sources */,
+				A4F482571C0514CB00FBA0BA /* NYTimesService.swift in Sources */,
 				A4F482401C0502EC00FBA0BA /* NewsModel.xcdatamodeld in Sources */,
 				A4F482111C04F11A00FBA0BA /* AppDelegate.swift in Sources */,
 				A4F4824F1C050E6800FBA0BA /* TemaDAO.swift in Sources */,
