@@ -29,6 +29,7 @@
 		AC57D5FC1C06732E00D6C4E0 /* BuscaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */; };
 		AC57D5FE1C067A3C00D6C4E0 /* MyLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */; };
 		AC57D6001C067EF400D6C4E0 /* DownloadImagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */; };
+		AC6B39871C18DDA40052A92E /* BuscaNoticasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B39861C18DDA40052A92E /* BuscaNoticasViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		ACE9213D1C18D24F009F1094 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE9213C1C18D24F009F1094 /* WebViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		ACECB1251C0F8F2D00588ECD /* HTMLFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACECB1241C0F8F2D00588ECD /* HTMLFileService.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuscaTableViewController.swift; sourceTree = "<group>"; };
 		AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLongPress.swift; sourceTree = "<group>"; };
 		AC57D5FF1C067EF400D6C4E0 /* DownloadImagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImagem.swift; sourceTree = "<group>"; };
+		AC6B39861C18DDA40052A92E /* BuscaNoticasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuscaNoticasViewController.swift; sourceTree = "<group>"; };
 		ACE9213C1C18D24F009F1094 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		ACECB1241C0F8F2D00588ECD /* HTMLFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLFileService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +210,7 @@
 				AC57D5FB1C06732E00D6C4E0 /* BuscaTableViewController.swift */,
 				AC57D5FD1C067A3C00D6C4E0 /* MyLongPress.swift */,
 				ACE9213C1C18D24F009F1094 /* WebViewController.swift */,
+				AC6B39861C18DDA40052A92E /* BuscaNoticasViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				A4F482401C0502EC00FBA0BA /* NewsModel.xcdatamodeld in Sources */,
 				A4F482111C04F11A00FBA0BA /* AppDelegate.swift in Sources */,
 				A4F4824F1C050E6800FBA0BA /* TemaDAO.swift in Sources */,
+				AC6B39871C18DDA40052A92E /* BuscaNoticasViewController.swift in Sources */,
 				A4493C7F1C0DE3DD000F243C /* ExtractService.swift in Sources */,
 				A4F4824D1C0505E100FBA0BA /* Setup.swift in Sources */,
 				A4F482591C0514E900FBA0BA /* NoticiaVO.swift in Sources */,

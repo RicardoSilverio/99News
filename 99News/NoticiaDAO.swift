@@ -27,14 +27,14 @@ class NoticiaDAO: NSObject {
         return fetchedResultController
     }
     
-    func isNoticiaSalva(noticia:Noticia) -> Bool {
+    func isNoticiaSalva(url: String) -> Bool {
         
         let fetchRequest = NSFetchRequest(entityName: "Noticia")
         
         let sortDescriptor = NSSortDescriptor(key: "dataPublicacao", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let predicate = NSPredicate(format: "url like '" + noticia.url! + "'")
+        let predicate = NSPredicate(format: "url like '" + url + "'")
         fetchRequest.predicate = predicate
         
         do {
@@ -43,7 +43,7 @@ class NoticiaDAO: NSObject {
                 return true
             }
         } catch {
-            print("Erro ao pesquisar notícia no banco")
+            //print("Erro ao pesquisar notícia no banco")
         }
         return false
     }

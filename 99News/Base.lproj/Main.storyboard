@@ -7,7 +7,7 @@
         <!--Temas Favoritos-->
         <scene sceneID="FYg-hy-fVp">
             <objects>
-                <viewController title="Temas Favoritos" id="Cby-g5-Mop" sceneMemberID="viewController">
+                <viewController title="Temas Favoritos" id="Cby-g5-Mop" customClass="TemasFavoritosTableViewController" customModule="_9News" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="If9-qy-eye"/>
                         <viewControllerLayoutGuide type="bottom" id="8QB-8T-uv4"/>
@@ -42,6 +42,10 @@
                                         <animations/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Cby-g5-Mop" id="aAZ-2Q-SBD"/>
+                                    <outlet property="delegate" destination="Cby-g5-Mop" id="6cy-YN-uxY"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -50,6 +54,7 @@
                     <navigationItem key="navigationItem" id="hPF-uC-gUp"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="tableView" destination="WX5-eI-a5a" id="cTH-Yw-g3G"/>
                         <segue destination="oH3-aq-FTR" kind="show" id="tf9-3Z-Qy9"/>
                     </connections>
                 </viewController>
@@ -120,7 +125,7 @@
         <!--Notícias Salvas-->
         <scene sceneID="MNb-MV-vHI">
             <objects>
-                <viewController title="Notícias Salvas" id="jn0-kK-HTh" sceneMemberID="viewController">
+                <viewController title="Notícias Salvas" id="jn0-kK-HTh" customClass="BuscaNoticasViewController" customModule="_9News" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rcq-eg-ZEk"/>
                         <viewControllerLayoutGuide type="bottom" id="TEz-AO-a7M"/>
@@ -163,6 +168,10 @@
                                         <animations/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="jn0-kK-HTh" id="rbu-Eg-tpX"/>
+                                    <outlet property="delegate" destination="jn0-kK-HTh" id="FHn-PF-PKG"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -171,6 +180,7 @@
                     <navigationItem key="navigationItem" id="0bN-W0-2hV"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="tableView" destination="3Vg-Xc-ODR" id="cNT-yb-ehy"/>
                         <segue destination="JVN-zN-cg9" kind="show" id="p0P-NE-iBe"/>
                     </connections>
                 </viewController>
@@ -260,6 +270,7 @@
                                 <state key="normal" title="+"/>
                                 <connections>
                                     <action selector="adicionarFavoritos:" destination="Ikx-6P-ce9" eventType="touchUpInside" id="c85-2r-JGD"/>
+                                    <action selector="adicionarTema:" destination="Ikx-6P-ce9" eventType="touchUpInside" id="led-1f-VS0"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1wm-Ih-og8">
@@ -407,6 +418,6 @@
         <image name="search" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gIx-gh-hvQ"/>
+        <segue reference="riE-Yx-l9V"/>
     </inferredMetricsTieBreakers>
 </document>

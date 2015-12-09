@@ -26,14 +26,14 @@ class TemaDAO: NSObject {
         return fetchedResultController
     }
     
-    func isTemaSalvo(tema:Tema) -> Bool {
+    func isTemaSalvo(nome: String) -> Bool {
         
         let fetchRequest = NSFetchRequest(entityName: "Tema")
         
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let predicate = NSPredicate(format: "ANY nome like '" + tema.nome! + "'")
+        let predicate = NSPredicate(format: "ANY nome like '" + nome + "'")
         fetchRequest.predicate = predicate
         
         do {
