@@ -10,17 +10,28 @@ import UIKit
 
 class WebViewController: UIViewController {
     
-    var noticiaUrl:String?
+    var noticia:NoticiaVO?
+    var htmlService:HTMLFileService!
     @IBOutlet weak var noticiaWebView: UIWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Carrega o webview com a url da Noticia, caso a mesma não seja nula
-        if(nil != noticiaUrl){
-            let url = NSURL(string: noticiaUrl!)
+        
+        if(Reachability.isConnectedToNetwork()){
+            
+            let url = NSURL(string: noticia!.url)
             let request = NSURLRequest(URL: url!)
             self.noticiaWebView.loadRequest(request)
+        
+        }else{
+            
+            htmlService.escreverArquivo(noticia!.resumo)
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            let request = NSURLRequest(URL: self.htmlService!.getURLArquivo())
+            self.noticiaWebView.loadRequest(request)
+            
+            }
         }
         
     }
@@ -28,6 +39,5 @@ class WebViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 
 }
