@@ -49,6 +49,17 @@ class TemasFavoritosTableViewController: UIViewController, UITableViewDelegate, 
         cell.textLabel?.text = tema.nome
         return cell
     }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let tema: Tema = self.fetchedResultController!.objectAtIndexPath(indexPath) as! Tema
+        self.performSegueWithIdentifier("temaToNoticiaSegue", sender: tema.nome)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "temaToNoticiaSegue"){
+            let nome: String = sender as! String
+            let vc:BuscaTableViewController = segue.destinationViewController as! BuscaTableViewController
+            vc.busca = nome
+        }
+    }
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
     }

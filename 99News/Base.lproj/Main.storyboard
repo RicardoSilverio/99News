@@ -55,7 +55,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="WX5-eI-a5a" id="cTH-Yw-g3G"/>
-                        <segue destination="oH3-aq-FTR" kind="show" id="tf9-3Z-Qy9"/>
+                        <segue destination="oH3-aq-FTR" kind="show" identifier="temaToNoticiaSegue" id="tf9-3Z-Qy9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x9w-Y0-bnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,7 +65,7 @@
         <!--Lista de Notícias-->
         <scene sceneID="aAy-Bo-1Hz">
             <objects>
-                <viewController title="Lista de Notícias" id="oH3-aq-FTR" sceneMemberID="viewController">
+                <viewController title="Lista de Notícias" id="oH3-aq-FTR" customClass="BuscaTableViewController" customModule="_9News" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="31g-lh-g4V"/>
                         <viewControllerLayoutGuide type="bottom" id="qtB-fH-7hv"/>
@@ -108,6 +108,10 @@
                                         <animations/>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="oH3-aq-FTR" id="0oD-cD-vA0"/>
+                                    <outlet property="delegate" destination="oH3-aq-FTR" id="OAA-q6-99n"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -115,6 +119,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="tableView" destination="jNP-2m-An3" id="7ec-SO-oO2"/>
                         <segue destination="JVN-zN-cg9" kind="show" id="gIx-gh-hvQ"/>
                     </connections>
                 </viewController>
@@ -269,7 +274,6 @@
                                 <animations/>
                                 <state key="normal" title="+"/>
                                 <connections>
-                                    <action selector="adicionarFavoritos:" destination="Ikx-6P-ce9" eventType="touchUpInside" id="c85-2r-JGD"/>
                                     <action selector="adicionarTema:" destination="Ikx-6P-ce9" eventType="touchUpInside" id="led-1f-VS0"/>
                                 </connections>
                             </button>
@@ -418,6 +422,6 @@
         <image name="search" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="riE-Yx-l9V"/>
+        <segue reference="gIx-gh-hvQ"/>
     </inferredMetricsTieBreakers>
 </document>

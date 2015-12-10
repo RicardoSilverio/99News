@@ -18,12 +18,19 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var requisicao: NYTimesService?
     
+    var busca: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if(busca != nil){
+            requisicao = NYTimesService(query: busca!)
+            requisicao!.delegate = self
+            requisicao!.executarPesquisa()
+        }
+        else{
         alerta("Aperte e segure sobre a notícia para salvar", titulo: "ATENÇÃO", botao:
             "Ok")
-        
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -70,12 +77,8 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    @IBAction func adicionarFavoritos(sender: UIButton) {
-        
-    }
-    
     func salvaNoticia(gesture: MyLongPress){
-        if(gesture.state == .Ended){
+        if(gesture.state == .Began){
             if(Reachability.isConnectedToNetwork()){
                 let managedObjectContext:NSManagedObjectContext = Setup.getManagedObjectContext()
                 
@@ -138,7 +141,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("CellArtigo", forIndexPath: indexPath)
         let noticia: NoticiaVO = noticias[indexPath.row]
         let longPress = MyLongPress(target: self, action: "salvaNoticia:")
-        longPress.minimumPressDuration = 1
+        longPress.minimumPressDuration = 0.5
         noticia.celula = indexPath
         longPress.noticia = noticia
         cell.addGestureRecognizer(longPress)
