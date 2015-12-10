@@ -16,6 +16,7 @@ extension Noticia {
 
     @NSManaged var titulo: String?
     @NSManaged var url: String?
+    @NSManaged var resumo: String?
     @NSManaged var conteudo: String?
     @NSManaged var dataPublicacao: NSDate?
 

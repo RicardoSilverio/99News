@@ -36,7 +36,8 @@ class NYTimesService: NSObject {
         
         self.resultadosNoticia.removeAll()
         
-        let urlRequest = NSURL(string: NYTimesService.urlAPI + "?q=" + query + "&page=0" + NYTimesService.keyAPI)
+        let urlRequest = NSURL(string: NYTimesService.urlAPI + "?q=" +
+            query.stringByAddingPercentEncodingWithAllowedCharacters(NSMutableCharacterSet.alphanumericCharacterSet())! + "&page=0" + NYTimesService.keyAPI)
         let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
             if(error != nil) {
                 print("Erro na requisição do json: Pesquisa Inicial de Notícias")
