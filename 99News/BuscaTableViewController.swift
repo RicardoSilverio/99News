@@ -71,12 +71,15 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         requisicao = NYTimesService(query: searchBar.text!)
         requisicao!.delegate = self
         requisicao!.executarPesquisa()
         
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        tableView.reloadData()
+    }
     func salvaNoticia(gesture: MyLongPress){
         if(gesture.state == .Began){
             if(Reachability.isConnectedToNetwork()){
