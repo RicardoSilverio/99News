@@ -13,6 +13,9 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var campoBusca: UISearchBar!
     
+    @IBOutlet weak var btnSalvarTema: UIButton!
+    
+    
     @IBOutlet weak var tableView: UITableView!
     var noticias: [NoticiaVO] = []
     
@@ -22,26 +25,35 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let info = NSUserDefaults.standardUserDefaults().objectForKey("infoExibida")
+        if(info == nil) {
+            alerta("Toque e segure sobre uma notícia para salvá-la", titulo: "Dica", botao: "Ok")
+            NSUserDefaults.standardUserDefaults().setValue("S", forKey: "infoExibida")
+        }
+            
+        
         if(busca != nil){
             requisicao = NYTimesService(query: busca!)
             requisicao!.delegate = self
             requisicao!.executarPesquisa()
         }
-        else{
-        alerta("Aperte e segure sobre a notícia para salvar", titulo: "ATENÇÃO", botao:
-            "Ok")
-        }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    
     }
     
     func pesquisaCompletada(resultados: [NoticiaVO]) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.noticias = resultados
             self.tableView.reloadData()
+        }
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let temaDao: TemaDAO = TemaDAO(managedObjectContext: Setup.getManagedObjectContext())
+        if(temaDao.isTemaSalvo(searchText)){
+            btnSalvarTema.setImage(UIImage(named: "full_star"), forState: .Normal)
+        } else {
+            btnSalvarTema.setImage(UIImage(named: "empty_star"), forState: .Normal)
         }
     }
     
@@ -56,17 +68,16 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
             else{
                 do{
                     let newTema:Tema = Tema.getNewTema(managedObjectContext)
-                    
                     newTema.nome = campoBusca.text!
-                    
                     try managedObjectContext.save()
+                    btnSalvarTema.setImage(UIImage(named: "full_star"), forState: .Normal)
                     
                 }catch{
                     managedObjectContext.rollback()
                     alerta("Não foi possível salvar", titulo: "Erro", botao: "Ok")
                 }
 
-                alerta("Tema salvo com sucesso", titulo: "Atenção", botao: "Ok")
+                alerta("Tema salvo com sucesso!", titulo: "99News", botao: "Ok")
             }
         }
     }
