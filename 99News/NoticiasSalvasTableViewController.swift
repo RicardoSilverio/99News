@@ -75,8 +75,6 @@ class NoticiasSalvasTableViewController: UIViewController, UITableViewDelegate, 
             Setup.getManagedObjectContext().deleteObject(noticia)
             do {
                 try Setup.getManagedObjectContext().save()
-                try self.fetchedResultController?.performFetch()
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
             } catch {
                 print("Erro ao deletar notícia salva")
             }

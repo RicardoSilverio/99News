@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate {
+class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate, ExtractServiceDelegate {
     
     @IBOutlet weak var campoBusca: UISearchBar!
     
@@ -23,8 +23,15 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var busca: String?
     
+    var extractService:ExtractService?
+    
+    var noticiaSalva:NoticiaVO?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        extractService = ExtractService()
+        extractService!.delegate = self
         
         let info = NSUserDefaults.standardUserDefaults().objectForKey("infoExibida")
         if(info == nil) {
@@ -46,6 +53,30 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
             self.noticias = resultados
             self.tableView.reloadData()
         }
+    }
+    
+    func requisicaoCompletada(artigoExtraido: NoticiaVO) {
+        let managedObjectContext:NSManagedObjectContext = Setup.getManagedObjectContext()
+        do{
+            let newNoticia:Noticia = Noticia.getNewNoticia((managedObjectContext))
+            
+            newNoticia.titulo = self.noticiaSalva!.titulo
+            newNoticia.url = self.noticiaSalva!.url
+            newNoticia.resumo = self.noticiaSalva!.resumo
+            newNoticia.conteudo = artigoExtraido.resumo
+            
+            try managedObjectContext.save()
+            let cell =  tableView.cellForRowAtIndexPath((noticiaSalva!.celula)!)
+            cell?.backgroundColor = UIColor.redColor()
+            
+        }catch{
+            managedObjectContext.rollback()
+            alerta("Não foi possível salvar a notícia. Tente novamente mais tarde.", titulo: "Erro", botao: "Ok")
+        }
+    }
+    
+    func requisicaoFalhou() {
+        
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -91,30 +122,24 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     override func viewDidAppear(animated: Bool) {
         tableView.reloadData()
+        if(campoBusca != nil && campoBusca.text != nil && campoBusca.text != ""){
+            let temaDao: TemaDAO = TemaDAO(managedObjectContext: Setup.getManagedObjectContext())
+            if(temaDao.isTemaSalvo(campoBusca.text!)) {
+                btnSalvarTema.setImage(UIImage(named: "full_star"), forState: .Normal)
+            } else {
+                btnSalvarTema.setImage(UIImage(named: "empty_star"), forState: .Normal)
+
+            }
+        }
     }
     func salvaNoticia(gesture: MyLongPress){
         if(gesture.state == .Began){
             if(Reachability.isConnectedToNetwork()){
                 let managedObjectContext:NSManagedObjectContext = Setup.getManagedObjectContext()
-                
                 let noticiaDao: NoticiaDAO = NoticiaDAO(managedObjectContext: managedObjectContext)
-                
                 if(!noticiaDao.isNoticiaSalva((gesture.noticia?.url)!)){
-                    do{
-                        let newNoticia:Noticia = Noticia.getNewNoticia((managedObjectContext))
-                        
-                        newNoticia.titulo = gesture.noticia?.titulo
-                        newNoticia.url = gesture.noticia?.url
-                        newNoticia.conteudo = gesture.noticia?.resumo
-                        
-                        try managedObjectContext.save()
-                        let cell =  tableView.cellForRowAtIndexPath((gesture.noticia?.celula)!)
-                        cell?.backgroundColor = UIColor.redColor()
-                        
-                    }catch{
-                        managedObjectContext.rollback()
-                        alerta("Não foi possível salvar", titulo: "Erro", botao: "Ok")
-                    }
+                    noticiaSalva = gesture.noticia
+                    extractService?.extrairArtigo((gesture.noticia?.url)!)
                 }
                 else{
                     alerta("Noticia já está salva", titulo: "Erro", botao: "Ok")
@@ -149,6 +174,14 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return noticias.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("", sender: indexPath)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
     }
     
     

@@ -52,8 +52,6 @@ class TemasFavoritosTableViewController: UIViewController, UITableViewDelegate, 
             Setup.getManagedObjectContext().deleteObject(tema)
             do {
                 try Setup.getManagedObjectContext().save()
-                try self.fetchedResultController?.performFetch()
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
             } catch {
                 print("Falha ao remover tema")
             }

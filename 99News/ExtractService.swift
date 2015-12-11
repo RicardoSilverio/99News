@@ -11,6 +11,7 @@ import UIKit
 protocol ExtractServiceDelegate {
     
     func requisicaoCompletada(noticia:NoticiaVO)
+    func requisicaoFalhou()
     
 }
 
@@ -32,34 +33,37 @@ class ExtractService: NSObject {
             if(error != nil) {
                 print("Erro na requisição do json: API Extract")
                 print(error)
-                return
-            }
+                self.delegate?.requisicaoFalhou()
+                
+            } else {
             
-            do {
-                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                let originalURL = json["original_url"] as! String
-                let title = json["title"] as! String
-                var content = json["content"] as? String
-                if(content == nil) {
-                    content = json["description"] as? String
-                    let link = "<br /><a href=\"\(originalURL)\">Veja a matéria completa.</a>"
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                    let originalURL = json["original_url"] as! String
+                    let title = json["title"] as! String
+                    var content = json["content"] as? String
                     if(content == nil) {
-                        content = ""
+                        content = json["description"] as? String
+                        let link = "<br /><a href=\"\(originalURL)\">Veja a matéria completa.</a>"
+                        if(content == nil) {
+                            content = ""
+                        }
+                        content = content! + link
                     }
-                    content = content! + link
+                    content = self.removerImagens(content!)
+                    content = self.montarHTML(content!, titulo: title)
+                    let milliseconds = json["published"] as? Double
+                    var date:NSDate?
+                    if(milliseconds != nil) {
+                        date = NSDate(timeIntervalSince1970: NSTimeInterval(milliseconds!/1000))
+                    } else {
+                        date = NSDate()
+                    }
+                    self.delegate?.requisicaoCompletada(NoticiaVO(titulo: title, url: originalURL, resumo: content!, imagem: nil, dataPublicacao: date, celula: nil))
+                } catch {
+                    print("Erro na serialização do json: API Extract")
+                    self.delegate?.requisicaoFalhou()
                 }
-                content = self.removerImagens(content!)
-                content = self.montarHTML(content!, titulo: title)
-                let milliseconds = json["published"] as? Double
-                var date:NSDate?
-                if(milliseconds != nil) {
-                    date = NSDate(timeIntervalSince1970: NSTimeInterval(milliseconds!/1000))
-                } else {
-                    date = NSDate()
-                }
-                self.delegate?.requisicaoCompletada(NoticiaVO(titulo: title, url: originalURL, resumo: content!, imagem: nil, dataPublicacao: date, celula: nil))
-            } catch {
-                print("Erro na serialização do json: API Extract")
             }
 
             
