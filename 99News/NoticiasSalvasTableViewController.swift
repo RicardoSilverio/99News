@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class BuscaNoticasViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class NoticiasSalvasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     var fetchedResultController: NSFetchedResultsController?
     
@@ -34,7 +34,7 @@ class BuscaNoticasViewController: UIViewController, UITableViewDelegate, UITable
             try self.fetchedResultController?.performFetch()
             
         }catch{
-            print("erro")
+            print("Erro ao recuperar notícias salvas")
         }
   
     }
@@ -63,6 +63,24 @@ class BuscaNoticasViewController: UIViewController, UITableViewDelegate, UITable
         cell.textLabel!.text = noticia.titulo
         cell.detailTextLabel!.text = noticia.conteudo
         return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if(editingStyle == .Delete) {
+            let noticia = self.fetchedResultController?.objectAtIndexPath(indexPath) as! Noticia
+            Setup.getManagedObjectContext().deleteObject(noticia)
+            do {
+                try Setup.getManagedObjectContext().save()
+                try self.fetchedResultController?.performFetch()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+            } catch {
+                print("Erro ao deletar notícia salva")
+            }
+        }
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {

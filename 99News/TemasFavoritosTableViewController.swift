@@ -42,6 +42,24 @@ class TemasFavoritosTableViewController: UIViewController, UITableViewDelegate, 
         return 0
     }
     
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if(editingStyle == .Delete) {
+            let tema = self.fetchedResultController?.objectAtIndexPath(indexPath) as! Tema
+            Setup.getManagedObjectContext().deleteObject(tema)
+            do {
+                try Setup.getManagedObjectContext().save()
+                try self.fetchedResultController?.performFetch()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+            } catch {
+                print("Falha ao remover tema")
+            }
+        }
+    }
+    
     //Carrega a tabela com os valores armazenados no bd
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CellTema", forIndexPath: indexPath)

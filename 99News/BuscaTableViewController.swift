@@ -58,6 +58,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func adicionarTema(sender: UIButton) {
+        campoBusca.resignFirstResponder()
         let managedObjectContext: NSManagedObjectContext = Setup.getManagedObjectContext()
         if(campoBusca.text! != ""){
             let temaDao: TemaDAO = TemaDAO(managedObjectContext: managedObjectContext)

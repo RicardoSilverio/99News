@@ -130,7 +130,7 @@
         <!--Notícias Salvas-->
         <scene sceneID="MNb-MV-vHI">
             <objects>
-                <viewController title="Notícias Salvas" id="jn0-kK-HTh" customClass="BuscaNoticasViewController" customModule="_9News" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Notícias Salvas" id="jn0-kK-HTh" customClass="NoticiasSalvasTableViewController" customModule="_9News" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rcq-eg-ZEk"/>
                         <viewControllerLayoutGuide type="bottom" id="TEz-AO-a7M"/>
@@ -424,6 +424,6 @@
         <image name="search" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="riE-Yx-l9V"/>
+        <segue reference="p0P-NE-iBe"/>
     </inferredMetricsTieBreakers>
 </document>
