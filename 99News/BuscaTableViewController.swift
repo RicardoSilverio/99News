@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Haneke
 
 class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate, ExtractServiceDelegate {
     
@@ -231,6 +232,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 cell.imageView?.contentMode = .ScaleToFill
                 cell.imageView?.image = UIImage(named: "save")
                 DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
+
                 //tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
             }
         
