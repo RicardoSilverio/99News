@@ -25,8 +25,6 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var extractService:ExtractService?
     
-    var noticiaSalva:NoticiaVO?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,19 +53,17 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func requisicaoCompletada(artigoExtraido: NoticiaVO) {
+    func extracaoArtigoCompletada(noticiaComConteudoExtraido: NoticiaVO) {
         let managedObjectContext:NSManagedObjectContext = Setup.getManagedObjectContext()
         do{
             let newNoticia:Noticia = Noticia.getNewNoticia((managedObjectContext))
             
-            newNoticia.titulo = self.noticiaSalva!.titulo
-            newNoticia.url = self.noticiaSalva!.url
-            newNoticia.resumo = self.noticiaSalva!.resumo
-            newNoticia.conteudo = artigoExtraido.resumo
+            newNoticia.titulo = noticiaComConteudoExtraido.titulo
+            newNoticia.url = noticiaComConteudoExtraido.url
+            newNoticia.resumo = noticiaComConteudoExtraido.resumo
+            newNoticia.conteudo = noticiaComConteudoExtraido.conteudo
             
             try managedObjectContext.save()
-            let cell =  tableView.cellForRowAtIndexPath((noticiaSalva!.celula)!)
-            cell?.backgroundColor = UIColor.redColor()
             
         }catch{
             managedObjectContext.rollback()
@@ -75,7 +71,12 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    func requisicaoFalhou() {
+    func extracaoArtigoFalhou(noticiaEnviada: NoticiaVO) {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            let cell =  self.tableView.cellForRowAtIndexPath((noticiaEnviada.celula)!)
+            cell?.backgroundColor = UIColor.clearColor()
+            self.alerta("Não foi possível salvar a notícia. Tente novamente mais tarde.", titulo: "Erro", botao: "Ok")
+        }
         
     }
     
@@ -138,15 +139,18 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 let managedObjectContext:NSManagedObjectContext = Setup.getManagedObjectContext()
                 let noticiaDao: NoticiaDAO = NoticiaDAO(managedObjectContext: managedObjectContext)
                 if(!noticiaDao.isNoticiaSalva((gesture.noticia?.url)!)){
-                    noticiaSalva = gesture.noticia
-                    extractService?.extrairArtigo((gesture.noticia?.url)!)
+                    extractService?.extrairArtigo((gesture.noticia)!)
+                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                        let cell =  self.tableView.cellForRowAtIndexPath((gesture.noticia!.celula)!)
+                        cell?.backgroundColor = UIColor.redColor()
+                    }
                 }
                 else{
                     alerta("Noticia já está salva", titulo: "Erro", botao: "Ok")
                 }
             }
             else{
-                alerta("Não há conexão com a internet, tentar mais tarde!", titulo: "Atenção", botao: "Ok")
+                alerta("Não há conexão com a Internet. Tente novamente mais tarde!", titulo: "Atenção", botao: "Ok")
             }
         }
         //gesture.noticia
@@ -177,11 +181,17 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("", sender: indexPath)
+        performSegueWithIdentifier("buscaToWebSegue", sender: indexPath)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        let noticiaVO = self.noticias[(sender as! NSIndexPath).row]
+        let noticiaDAO = NoticiaDAO(managedObjectContext: Setup.getManagedObjectContext())
+        if let noticiaSalva = noticiaDAO.consultarNoticiaPorURL(noticiaVO.url) {
+            noticiaVO.conteudo = noticiaSalva.conteudo
+        }
+        let destinationViewController = segue.destinationViewController as! WebViewController
+        destinationViewController.noticia = noticiaVO
     }
     
     
@@ -194,15 +204,21 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         longPress.noticia = noticia
         cell.addGestureRecognizer(longPress)
         ///
+
+            cell.textLabel!.text = noticia.titulo
+            cell.detailTextLabel!.text = noticia.resumo
+            cell.textLabel?.backgroundColor = UIColor.clearColor()
+            cell.detailTextLabel?.backgroundColor = UIColor.clearColor()
         
-        cell.textLabel!.text = noticia.titulo
-        cell.detailTextLabel!.text = noticia.resumo
-        cell.textLabel?.backgroundColor = UIColor.clearColor()
-        cell.detailTextLabel?.backgroundColor = UIColor.clearColor()
-        if(noticia.imagemURL != nil){
+        
+            /*
+            cell.imageView?.frame = CGRectMake(0, 0, 60, 40)
+            cell.imageView?.contentMode = .ScaleToFill
             cell.imageView?.image = UIImage(named: "save")
             DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
-        }
+            */
+        
+    
         let noticiaDao: NoticiaDAO = NoticiaDAO(managedObjectContext: Setup.getManagedObjectContext())
         if(noticiaDao.isNoticiaSalva(noticia.url)){
             cell.backgroundColor = UIColor.redColor()
@@ -210,53 +226,15 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         else{
             cell.backgroundColor = UIColor.clearColor()
         }
+            if(noticia.imagemURL != nil){
+                cell.imageView?.frame = CGRectMake(0, 0, 40, 30)
+                cell.imageView?.contentMode = .ScaleToFill
+                cell.imageView?.image = UIImage(named: "save")
+                DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
+                //tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+            }
+        
         return cell
     }
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the specified item to be editable.
-    return true
-    }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
 }

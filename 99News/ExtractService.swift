@@ -10,8 +10,8 @@ import UIKit
 
 protocol ExtractServiceDelegate {
     
-    func requisicaoCompletada(noticia:NoticiaVO)
-    func requisicaoFalhou()
+    func extracaoArtigoCompletada(noticiaComConteudoExtraido:NoticiaVO)
+    func extracaoArtigoFalhou(noticiaEnviada:NoticiaVO)
     
 }
 
@@ -27,13 +27,13 @@ class ExtractService: NSObject {
         self.session = NSURLSession(configuration: sessionConfig)
     }
     
-    func extrairArtigo(urlNoticia:String) {
-        let urlRequest = NSURL(string: ExtractService.urlAPI + "&url=" + urlNoticia)
+    func extrairArtigo(noticia:NoticiaVO) {
+        let urlRequest = NSURL(string: ExtractService.urlAPI + "&url=" + noticia.url)
         let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
             if(error != nil) {
                 print("Erro na requisição do json: API Extract")
                 print(error)
-                self.delegate?.requisicaoFalhou()
+                self.delegate?.extracaoArtigoFalhou(noticia)
                 
             } else {
             
@@ -59,10 +59,11 @@ class ExtractService: NSObject {
                     } else {
                         date = NSDate()
                     }
-                    self.delegate?.requisicaoCompletada(NoticiaVO(titulo: title, url: originalURL, resumo: content!, imagem: nil, dataPublicacao: date, celula: nil))
+                    noticia.conteudo = content
+                    self.delegate?.extracaoArtigoCompletada(noticia)
                 } catch {
                     print("Erro na serialização do json: API Extract")
-                    self.delegate?.requisicaoFalhou()
+                    self.delegate?.extracaoArtigoFalhou(noticia)
                 }
             }
 

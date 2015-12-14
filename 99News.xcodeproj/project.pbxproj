@@ -52,7 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A4D3617B1C0F2BB300B37670 /* CopyFiles */ = {
+		A4C218D31C1E6D4200FE38D0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
@@ -225,7 +225,7 @@
 				A4F482091C04F11A00FBA0BA /* Sources */,
 				A4F4820A1C04F11A00FBA0BA /* Frameworks */,
 				A4F4820B1C04F11A00FBA0BA /* Resources */,
-				A4D3617B1C0F2BB300B37670 /* CopyFiles */,
+				A4C218D31C1E6D4200FE38D0 /* CopyFiles */,
 			);
 			buildRules = (
 			);
