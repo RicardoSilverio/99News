@@ -43,9 +43,30 @@ class NoticiaDAO: NSObject {
                 return true
             }
         } catch {
-            //print("Erro ao pesquisar notícia no banco")
+            print("Erro ao pesquisar notícia no banco")
         }
         return false
+    }
+    
+    func consultarNoticiaPorURL(url: String) -> Noticia? {
+        let fetchRequest = NSFetchRequest(entityName: "Noticia")
+        
+        let sortDescriptor = NSSortDescriptor(key: "dataPublicacao", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        let predicate = NSPredicate(format: "url like '" + url + "'")
+        fetchRequest.predicate = predicate
+        
+        do {
+            let results = try managedObjectContext.executeFetchRequest(fetchRequest)
+            if(results.count > 0) {
+                return results[0] as! Noticia
+            }
+        } catch {
+            print("Erro ao pesquisar notícia no banco")
+        }
+        return nil
+
     }
 
 }

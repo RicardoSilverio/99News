@@ -61,7 +61,7 @@ class NoticiasSalvasTableViewController: UIViewController, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier("CellArtigoSalvo", forIndexPath: indexPath)
         let noticia: Noticia = self.fetchedResultController?.objectAtIndexPath(indexPath) as! Noticia
         cell.textLabel!.text = noticia.titulo
-        cell.detailTextLabel!.text = noticia.conteudo
+        cell.detailTextLabel!.text = noticia.resumo
         return cell
     }
     
@@ -84,6 +84,19 @@ class NoticiasSalvasTableViewController: UIViewController, UITableViewDelegate, 
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.reloadData()
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let noticiaVO = sender as! NoticiaVO
+        let destinationViewController = segue.destinationViewController as! WebViewController
+        destinationViewController.noticia = noticiaVO
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let noticia = self.fetchedResultController?.objectAtIndexPath(indexPath) as! Noticia
+        let noticiaVO = NoticiaVO(titulo: noticia.titulo!, url: noticia.url!, conteudo: noticia.conteudo!)
+        performSegueWithIdentifier("noticiaToWebSegue", sender: noticiaVO)
+    }
+    
     /*
     // MARK: - Navigation
 

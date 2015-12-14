@@ -33,7 +33,7 @@ class TemaDAO: NSObject {
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        let predicate = NSPredicate(format: "ANY nome like '" + nome + "'")
+        let predicate = NSPredicate(format: "ANY nome like[c] '" + nome + "'")
         fetchRequest.predicate = predicate
         
         do {
