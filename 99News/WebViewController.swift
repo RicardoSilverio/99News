@@ -40,7 +40,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, ExtractServiceDele
         if(Reachability.isConnectedToNetwork()){
             
             txtTitulo.hidden = true
-            txtURL.text = noticia!.url
+            txtURL.text = self.extrairURL(noticia!.url)
             let managedObjectContext = Setup.getManagedObjectContext()
             let noticiaDAO = NoticiaDAO(managedObjectContext: managedObjectContext)
             
@@ -138,6 +138,17 @@ class WebViewController: UIViewController, UIWebViewDelegate, ExtractServiceDele
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func extrairURL(url:String) -> String {
+        let stringlength = url.characters.count
+        do {
+            let regex:NSRegularExpression = try NSRegularExpression(pattern: "^.*/", options: NSRegularExpressionOptions.CaseInsensitive)
+            return regex.stringByReplacingMatchesInString(url, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSRange(location: 0, length: stringlength), withTemplate: "")
+        } catch {
+            print("Erro na construção do regex")
+            return ""
+        }
     }
 
 }

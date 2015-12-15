@@ -50,7 +50,7 @@ class NYTimesService: NSObject {
                         if let results = responseData["docs"] as? [[String:AnyObject]] {
                             if(results.count > 0) {
                                 self.processarPagina(results)
-                                self.delegate?.pesquisaCompletada(self.resultadosNoticia)
+                                self.requisitarProximaPagina()
                             }
                             else{
                                 // sem registros
@@ -72,7 +72,7 @@ class NYTimesService: NSObject {
     func requisitarProximaPagina() {
       self.pageCount = self.pageCount + 1
         
-      let urlRequest = NSURL(string: NYTimesService.urlAPI + "&q=" + query + "&page=" + "\(self.pageCount)" + NYTimesService.keyAPI) //"&start=\(self.resultadosNoticia.count)")
+      let urlRequest = NSURL(string: NYTimesService.urlAPI + "?q=" + query.stringByAddingPercentEncodingWithAllowedCharacters(NSMutableCharacterSet.alphanumericCharacterSet())! + "&page=" + "\(self.pageCount)" + NYTimesService.keyAPI) //"&start=\(self.resultadosNoticia.count)")
       let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
           if(error != nil) {
               print("Erro na requisição do json: Requisição de Página de Resultados - \(self.pageCount)" )
@@ -147,6 +147,10 @@ class NYTimesService: NSObject {
             newString = newString.stringByReplacingOccurrencesOfString(escaped_char, withString: unescaped_char, options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
         }
         return newString
+    }
+    
+    func getPageCount() -> Int {
+        return pageCount
     }
 
 }

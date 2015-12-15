@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import Haneke
 
-class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate, ExtractServiceDelegate {
+class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate, ExtractServiceDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var campoBusca: UISearchBar!
     
@@ -49,7 +49,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func pesquisaCompletada(resultados: [NoticiaVO]) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.noticias = resultados
+            self.noticias.appendContentsOf(resultados)
             self.tableView.reloadData()
         }
     }
@@ -185,6 +185,17 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         performSegueWithIdentifier("buscaToWebSegue", sender: indexPath)
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        self.campoBusca?.resignFirstResponder()
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        print(scrollView.contentOffset.y)
+    }
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print(scrollView.contentOffset.y)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let noticiaVO = self.noticias[(sender as! NSIndexPath).row]
         let noticiaDAO = NoticiaDAO(managedObjectContext: Setup.getManagedObjectContext())
@@ -197,7 +208,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CellArtigo", forIndexPath: indexPath)
+        let cell:NoticiaTableViewCell = (tableView.dequeueReusableCellWithIdentifier("CellArtigo", forIndexPath: indexPath) as! NoticiaTableViewCell)
         let noticia: NoticiaVO = noticias[indexPath.row]
         let longPress = MyLongPress(target: self, action: "salvaNoticia:")
         longPress.minimumPressDuration = 0.5
@@ -206,10 +217,10 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.addGestureRecognizer(longPress)
         ///
 
-            cell.textLabel!.text = noticia.titulo
-            cell.detailTextLabel!.text = noticia.resumo
-            cell.textLabel?.backgroundColor = UIColor.clearColor()
-            cell.detailTextLabel?.backgroundColor = UIColor.clearColor()
+            cell.txtTitulo.text = noticia.titulo
+            cell.txtResumo.text = noticia.resumo
+            cell.txtTitulo.backgroundColor = UIColor.clearColor()
+            cell.txtResumo.backgroundColor = UIColor.clearColor()
         
         
             /*
@@ -227,14 +238,12 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         else{
             cell.backgroundColor = UIColor.clearColor()
         }
-            if(noticia.imagemURL != nil){
-                cell.imageView?.frame = CGRectMake(0, 0, 40, 30)
-                cell.imageView?.contentMode = .ScaleToFill
-                cell.imageView?.image = UIImage(named: "save")
-                DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
-
-                //tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-            }
+        
+        cell.imgFoto.image = UIImage(named: "newspaper")
+        if(noticia.imagemURL != nil){
+            cell.imgFoto.contentMode = .ScaleToFill
+            DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
+        }
         
         return cell
     }

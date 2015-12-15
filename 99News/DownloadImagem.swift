@@ -19,7 +19,7 @@ class DownloadImagem: NSObject {
                 if let imageData = NSData(contentsOfURL: url!){
                     
                     dispatch_async(dispatch_get_main_queue(), {
-                        celula.imageView?.image = UIImage(data: imageData)
+                        (celula as! NoticiaTableViewCell).imgFoto.image = UIImage(data: imageData)
                     })
                 }
             }
