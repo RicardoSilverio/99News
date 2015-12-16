@@ -70,34 +70,38 @@ class NYTimesService: NSObject {
     }
     
     func requisitarProximaPagina() {
-      self.pageCount = self.pageCount + 1
         
-      let urlRequest = NSURL(string: NYTimesService.urlAPI + "?q=" + query.stringByAddingPercentEncodingWithAllowedCharacters(NSMutableCharacterSet.alphanumericCharacterSet())! + "&page=" + "\(self.pageCount)" + NYTimesService.keyAPI) //"&start=\(self.resultadosNoticia.count)")
-      let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
-          if(error != nil) {
-              print("Erro na requisição do json: Requisição de Página de Resultados - \(self.pageCount)" )
-              print(error)
-          } else {
-              do {
-                  let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                  if let responseData = json["response"] as? [String:AnyObject] {
-                      
-                          if let results = responseData["docs"] as? [[String:AnyObject]] {
-                              if(results.count > 0) {
-                                  self.processarPagina(results)
-                                  self.delegate?.pesquisaCompletada(self.resultadosNoticia)
-                              }
-                              else{
-                                  //sem registros
-                              }
-                          }
-                  }
-              } catch {
-                  print("Erro na serialização do json: Requisição de Página de Resultados - \(self.pageCount)")
-              }
-          }
-      })
-      task?.resume()
+        if(self.pageCount < 100) {
+            
+            self.pageCount = self.pageCount + 1
+            
+            let urlRequest = NSURL(string: NYTimesService.urlAPI + "?q=" + query.stringByAddingPercentEncodingWithAllowedCharacters(NSMutableCharacterSet.alphanumericCharacterSet())! + "&page=" + "\(self.pageCount)" + NYTimesService.keyAPI) //"&start=\(self.resultadosNoticia.count)")
+            let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+                if(error != nil) {
+                    print("Erro na requisição do json: Requisição de Página de Resultados - \(self.pageCount)" )
+                    print(error)
+                } else {
+                    do {
+                        let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
+                        if let responseData = json["response"] as? [String:AnyObject] {
+                            
+                            if let results = responseData["docs"] as? [[String:AnyObject]] {
+                                if(results.count > 0) {
+                                    self.processarPagina(results)
+                                    self.delegate?.pesquisaCompletada(self.resultadosNoticia)
+                                }
+                                else{
+                                    //sem registros
+                                }
+                            }
+                        }
+                    } catch {
+                        print("Erro na serialização do json: Requisição de Página de Resultados - \(self.pageCount)")
+                    }
+                }
+            })
+            task?.resume()
+        }
     }
     
     private func processarPagina(results:[[String:AnyObject]]) {
@@ -126,7 +130,6 @@ class NYTimesService: NSObject {
                                               resumo: subtitulo,
                 imagem: imagemURL, dataPublicacao:nil, celula: nil)
             resultadosNoticia.append(noticia)
-            print(noticia.titulo + " (\(noticia.url) [\(noticia.resumo)]")
         }
     }
     

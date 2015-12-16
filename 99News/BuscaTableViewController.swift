@@ -49,7 +49,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func pesquisaCompletada(resultados: [NoticiaVO]) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.noticias.appendContentsOf(resultados)
+            self.noticias = resultados
             self.tableView.reloadData()
         }
     }
@@ -190,10 +190,14 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
+        if(requisicao != nil && Int(scrollView.contentOffset.y) / 90 > (((requisicao?.getPageCount())! + 1) * 10) / 2) {
+            requisicao?.requisitarProximaPagina()
+        }
     }
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print(scrollView.contentOffset.y)
+        if(requisicao != nil && Int(scrollView.contentOffset.y) / 90 > (((requisicao?.getPageCount())! + 1) * 10) / 2) {
+            requisicao?.requisitarProximaPagina()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -244,7 +248,6 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.imgFoto.contentMode = .ScaleToFill
             DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
         }
-        
         return cell
     }
     
