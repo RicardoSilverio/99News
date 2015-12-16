@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Haneke
 
 class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate, ExtractServiceDelegate, UIScrollViewDelegate {
     
