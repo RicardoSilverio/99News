@@ -120,12 +120,18 @@
                                     <outlet property="delegate" destination="oH3-aq-FTR" id="OAA-q6-99n"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DSw-Wt-wdA" userLabel="progressLista">
+                                <rect key="frame" x="141" y="241" width="37" height="37"/>
+                                <animations/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="progress" destination="DSw-Wt-wdA" id="Vr6-s1-lQ0"/>
                         <outlet property="tableView" destination="jNP-2m-An3" id="7ec-SO-oO2"/>
                         <segue destination="JVN-zN-cg9" kind="show" identifier="buscaToWebSegue" id="gIx-gh-hvQ"/>
                     </connections>
@@ -228,7 +234,7 @@
                                             <action selector="reload" destination="xV5-op-YEH" id="t11-bu-hm4"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem image="05825E0D-9E62-4DF7-A8F2-BD306EF4EB0E" style="plain" id="EGi-zx-a8A">
+                                    <barButtonItem image="94CF5E96-7DB5-4AC3-BE8E-270181BC12FD" style="plain" id="EGi-zx-a8A">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zjx-nx-iaA">
                                             <rect key="frame" x="78" y="10" width="18" height="25"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -241,10 +247,10 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="URL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JB-ug-jxs">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Título Online" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JB-ug-jxs">
                                 <rect key="frame" x="113" y="68" width="205" height="38"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -277,8 +283,8 @@
                         <outlet property="noticiaWebView" destination="xV5-op-YEH" id="WTN-gn-58V"/>
                         <outlet property="progress" destination="uLi-rE-sz3" id="ixQ-ox-OQ5"/>
                         <outlet property="toolbar" destination="w38-H4-MzH" id="0IG-sh-QH2"/>
-                        <outlet property="txtTitulo" destination="D0w-QW-kko" id="Qy4-yh-CHC"/>
-                        <outlet property="txtURL" destination="1JB-ug-jxs" id="f0Y-J9-lmi"/>
+                        <outlet property="txtTitulo" destination="D0w-QW-kko" id="vxK-K0-7LN"/>
+                        <outlet property="txtTituloOnline" destination="1JB-ug-jxs" id="1t2-lX-SCL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSx-MR-lcU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -297,7 +303,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Buscar por carros, esportes, etc." translatesAutoresizingMaskIntoConstraints="NO" id="ZBi-wa-Iys">
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Buscar por cars, sports, etc." translatesAutoresizingMaskIntoConstraints="NO" id="ZBi-wa-Iys">
                                 <rect key="frame" x="0.0" y="64" width="269" height="44"/>
                                 <animations/>
                                 <textInputTraits key="textInputTraits"/>
@@ -359,6 +365,11 @@
                                     <outlet property="delegate" destination="Ikx-6P-ce9" id="qXK-sp-LwA"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wWu-uy-uYb" userLabel="progressBusca">
+                                <rect key="frame" x="141" y="241" width="37" height="37"/>
+                                <animations/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -370,6 +381,7 @@
                     <connections>
                         <outlet property="btnSalvarTema" destination="Hey-HD-hCi" id="HkH-nN-Ubt"/>
                         <outlet property="campoBusca" destination="ZBi-wa-Iys" id="dBS-jv-BkS"/>
+                        <outlet property="progress" destination="wWu-uy-uYb" id="M7f-Sb-Xic"/>
                         <outlet property="tableView" destination="1wm-Ih-og8" id="hmX-I6-IGn"/>
                         <segue destination="JVN-zN-cg9" kind="show" identifier="buscaToWebSegue" id="riE-Yx-l9V"/>
                     </connections>
@@ -461,7 +473,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="05825E0D-9E62-4DF7-A8F2-BD306EF4EB0E" width="256" height="256">
+        <image name="94CF5E96-7DB5-4AC3-BE8E-270181BC12FD" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -4910,6 +4922,6 @@ twAAAAAAAAQBAAAAAAAAAD4AAAAAAAAAAAAAAAAABA65A
         <image name="search" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gIx-gh-hvQ"/>
+        <segue reference="riE-Yx-l9V"/>
     </inferredMetricsTieBreakers>
 </document>

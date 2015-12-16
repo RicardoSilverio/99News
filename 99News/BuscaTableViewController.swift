@@ -26,6 +26,10 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var extractService:ExtractService?
     
+    @IBOutlet weak var progress: UIActivityIndicatorView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,14 +47,30 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
             requisicao = NYTimesService(query: busca!)
             requisicao!.delegate = self
             requisicao!.executarPesquisa()
+            progress.startAnimating()
         }
     
+    }
+    
+    func pesquisaSemResultados() {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.progress.stopAnimating()
+        }
+        alerta("Nenhuma notícia encontrada", titulo: "Atenção", botao: "Ok")
+    }
+    
+    func falhaNaPesquisa() {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.progress.stopAnimating()
+        }
+        alerta("Não foi possível concluir a pesquisa. Tente novamente mais tarde", titulo: "Atenção", botao: "Ok")
     }
     
     func pesquisaCompletada(resultados: [NoticiaVO]) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.noticias = resultados
             self.tableView.reloadData()
+            self.progress.stopAnimating()
         }
     }
     
@@ -120,7 +140,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         requisicao = NYTimesService(query: searchBar.text!)
         requisicao!.delegate = self
         requisicao!.executarPesquisa()
-        
+        self.progress.startAnimating()
     }
     override func viewDidAppear(animated: Bool) {
         tableView.reloadData()
@@ -191,11 +211,13 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         if(requisicao != nil && Int(scrollView.contentOffset.y) / 90 > (((requisicao?.getPageCount())! + 1) * 10) / 2) {
+            self.progress.startAnimating()
             requisicao?.requisitarProximaPagina()
         }
     }
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if(requisicao != nil && Int(scrollView.contentOffset.y) / 90 > (((requisicao?.getPageCount())! + 1) * 10) / 2) {
+            self.progress.startAnimating()
             requisicao?.requisitarProximaPagina()
         }
     }

@@ -11,6 +11,8 @@ import UIKit
 protocol NYTimesServiceDelegate {
     
     func pesquisaCompletada(resultados:[NoticiaVO])
+    func pesquisaSemResultados()
+    func falhaNaPesquisa()
 }
 
 class NYTimesService: NSObject {
@@ -41,6 +43,7 @@ class NYTimesService: NSObject {
         let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
             if(error != nil) {
                 print("Erro na requisição do json: Pesquisa Inicial de Notícias")
+                self.delegate?.falhaNaPesquisa()
             } else {
                 
                 do {
@@ -53,13 +56,14 @@ class NYTimesService: NSObject {
                                 self.requisitarProximaPagina()
                             }
                             else{
-                                // sem registros
+                                self.delegate?.pesquisaSemResultados()
                             }
                         }
                         
                     }
                 } catch {
                     print("Erro na serialização do json: Pesquisa Inicial de Notícias")
+                    self.delegate?.falhaNaPesquisa()
                 }
                 
                 
@@ -79,7 +83,7 @@ class NYTimesService: NSObject {
             let task = self.session?.dataTaskWithURL(urlRequest!, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
                 if(error != nil) {
                     print("Erro na requisição do json: Requisição de Página de Resultados - \(self.pageCount)" )
-                    print(error)
+                    self.delegate?.falhaNaPesquisa()
                 } else {
                     do {
                         let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
@@ -90,13 +94,11 @@ class NYTimesService: NSObject {
                                     self.processarPagina(results)
                                     self.delegate?.pesquisaCompletada(self.resultadosNoticia)
                                 }
-                                else{
-                                    //sem registros
-                                }
                             }
                         }
                     } catch {
                         print("Erro na serialização do json: Requisição de Página de Resultados - \(self.pageCount)")
+                        self.delegate?.falhaNaPesquisa()
                     }
                 }
             })

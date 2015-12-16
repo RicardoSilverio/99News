@@ -19,7 +19,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, ExtractServiceDele
     @IBOutlet var btnSalvarNoticia: UIButton!
 
     
-    @IBOutlet weak var txtURL: UILabel!
+    @IBOutlet weak var txtTituloOnline: UILabel!
     @IBOutlet weak var txtTitulo: UILabel!
     
     @IBOutlet weak var toolbar: UIToolbar!
@@ -40,7 +40,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, ExtractServiceDele
         if(Reachability.isConnectedToNetwork()){
             
             txtTitulo.hidden = true
-            txtURL.text = self.extrairURL(noticia!.url)
+            txtTituloOnline.text = noticia?.titulo
             let managedObjectContext = Setup.getManagedObjectContext()
             let noticiaDAO = NoticiaDAO(managedObjectContext: managedObjectContext)
             
@@ -56,7 +56,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, ExtractServiceDele
                 
                 self.toolbar.items?.removeAll()
                 
-                txtURL.hidden = true
+                txtTituloOnline.hidden = true
                 txtTitulo.text = noticia!.titulo
                 htmlService!.escreverArquivo(noticia!.conteudo!)
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
