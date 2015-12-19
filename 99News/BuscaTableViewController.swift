@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Haneke
 
 class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, NYTimesServiceDelegate, ExtractServiceDelegate, UIScrollViewDelegate {
     
@@ -240,20 +241,11 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         noticia.celula = indexPath
         longPress.noticia = noticia
         cell.addGestureRecognizer(longPress)
-        ///
 
-            cell.txtTitulo.text = noticia.titulo
-            cell.txtResumo.text = noticia.resumo
-            cell.txtTitulo.backgroundColor = UIColor.clearColor()
-            cell.txtResumo.backgroundColor = UIColor.clearColor()
-        
-        
-            /*
-            cell.imageView?.frame = CGRectMake(0, 0, 60, 40)
-            cell.imageView?.contentMode = .ScaleToFill
-            cell.imageView?.image = UIImage(named: "save")
-            DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
-            */
+        cell.txtTitulo.text = noticia.titulo
+        cell.txtResumo.text = noticia.resumo
+        cell.txtTitulo.backgroundColor = UIColor.clearColor()
+        cell.txtResumo.backgroundColor = UIColor.clearColor()
         
     
         let noticiaDao: NoticiaDAO = NoticiaDAO(managedObjectContext: Setup.getManagedObjectContext())
@@ -266,8 +258,7 @@ class BuscaTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         cell.imgFoto.image = UIImage(named: "newspaper")
         if(noticia.imagemURL != nil){
-            cell.imgFoto.contentMode = .ScaleToFill
-            DownloadImagem.downloadImage(noticia.imagemURL!, celula: cell)
+            cell.imgFoto.hnk_setImageFromURL(NSURL(string: noticia.imagemURL!)!)
         }
         return cell
     }
